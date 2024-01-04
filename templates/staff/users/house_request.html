@@ -1,0 +1,223 @@
+{% extends 'bases/staffbase.html' %}
+{% load static %}
+{% block content %}
+<!-- End Navbar -->
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h6>House Request Table</h6> 
+                    <!-- <a href="#" target="_blank" style="float:right;" class="btn btn-dark btn-sm mb-3">Create User</a> -->
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        User Id</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        User Name</th>
+                                   
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        User Request</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Forword to House owner</th>
+                                    
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- for loop  -->
+                                <tr>
+                                    
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">User ID</h6>
+                                                <p class="text-xs text-secondary mb-0"></p>
+                                                
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">User_Name</p>
+                                        
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">This is the request by the user.</p>
+              
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        
+                                        <button style="border: none;" class="badge badge-sm bg-gradient-success" onclick="alert('Are you sure you want to Deactivate this Staff?')"><a href="#" style="color:white;">Forward</a></button>
+                                    
+                                        <!-- <span class="badge badge-sm bg-gradient-secondary">Inactive</span> -->
+                                        
+                                    </td>
+                                    
+                                    <td class="align-middle">
+                                        
+                                        <button style="border: none;" class="badge badge-sm bg-gradient-danger" onclick="alert('Are you sure you want to Deactivate this Staff?')"><a href="#" style="color:white;">Inactivate</a></button>
+                                       
+                                        <!-- <button style="border: none;" class="badge badge-sm bg-gradient-success" onclick="alert('Are you sure you want to Activate this Staff?')"><a href="#" style="color:white;">Activate</a></button> -->
+                                       
+                                    </td>
+                                    <!-- <td> -->
+                                        <!-- <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                        data-toggle="tooltip" data-original-title="Edit user">
+                                        Edit
+                                    </a> -->
+                                    <!-- <a class="btn btn-link text-dark px-3 mb-0" onclick="alert('Are you sure you want to edit this staff?')" href="#"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                                </td> -->
+                                </tr>
+                                
+                                <!-- <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">Alexa Liras</h6>
+                                                <p class="text-xs text-secondary mb-0">alexa@creative-tim.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">Programator</p>
+                                        <p class="text-xs text-secondary mb-0">Developer</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                            data-toggle="tooltip" data-original-title="Edit user">
+                                            Edit
+                                        </a>
+                                    </td>
+                                </tr> -->
+                                <!-- <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">Laurent Perrier</h6>
+                                                <p class="text-xs text-secondary mb-0">laurent@creative-tim.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">Executive</p>
+                                        <p class="text-xs text-secondary mb-0">Projects</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm bg-gradient-success">Online</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">19/09/17</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                            data-toggle="tooltip" data-original-title="Edit user">
+                                            Edit
+                                        </a>
+                                    </td>
+                                </tr> -->
+                                <!-- <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">Michael Levi</h6>
+                                                <p class="text-xs text-secondary mb-0">michael@creative-tim.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">Programator</p>
+                                        <p class="text-xs text-secondary mb-0">Developer</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm bg-gradient-success">Online</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">24/12/08</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                            data-toggle="tooltip" data-original-title="Edit user">
+                                            Edit
+                                        </a>
+                                    </td>
+                                </tr> -->
+                                <!-- <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">Richard Gran</h6>
+                                                <p class="text-xs text-secondary mb-0">richard@creative-tim.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">Manager</p>
+                                        <p class="text-xs text-secondary mb-0">Executive</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">04/10/21</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                            data-toggle="tooltip" data-original-title="Edit user">
+                                            Edit
+                                        </a>
+                                    </td>
+                                </tr> -->
+                                <!-- <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">Miriam Eric</h6>
+                                                <p class="text-xs text-secondary mb-0">miriam@creative-tim.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">Programtor</p>
+                                        <p class="text-xs text-secondary mb-0">Developer</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">14/09/20</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                            data-toggle="tooltip" data-original-title="Edit user">
+                                            Edit
+                                        </a>
+                                    </td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
