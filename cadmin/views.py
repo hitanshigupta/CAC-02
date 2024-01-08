@@ -6,15 +6,16 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from .models import staff_details
 from .models import Notification
+from .models import UserType
 
 
-@login_required(login_url="admin_login")
+
 def dashboard(request):
     noti = Notification.objects.filter(is_read = False).order_by('-created_at')
     page = "Dashbaord"
     return render(request , 'admin/dashboard.html' , {'page':page , 'noti':noti})
 
-@login_required(login_url="admin_login")
+
 def staff_dashboard(request):
     page = "Staff Dashbaord"
     return render(request , 'staff/staff_dashboard.html')
@@ -73,6 +74,8 @@ def create_staff(request):
                 user.is_staff = True
                 user.save()
                 noti = Notification.objects.create(user = user , message = "New Staff Added")
+                type = UserType.objects.create(user = user , usertype = "Staff")
+                type.save()
                 noti.save()
                 return redirect('admin_login')
             
