@@ -12,8 +12,15 @@ from .models import UserType
 
 def dashboard(request):
     noti = Notification.objects.filter(is_read = False).order_by('-created_at')
+    user_count = User.objects.all().count()
+    staff = User.objects.filter(is_staff = True , is_superuser = False)
+    staff_count = staff.count()
+    student_count = User.objects.filter(is_staff = False , is_superuser = False).count()
+
+    
+
     page = "Dashbaord"
-    return render(request , 'admin/dashboard.html' , {'page':page , 'noti':noti})
+    return render(request , 'admin/dashboard.html' , {'page':page , 'noti':noti , 'user_count':user_count , 'staff_count':staff_count , 'student_count':student_count})
 
 
 def staff_dashboard(request):
@@ -125,6 +132,16 @@ def staff_passwordchange(request , staff_id):
             return redirect('staff_list')
 
     return render(request , 'admin/staff/password_change.html')
+
+# HOUSE OWNER
+def hwlist(request):
+    usertype = UserType.objects.all()
+    user = User.objects.all()
+    return render(request , 'admin/houseOwner/hwlist.html' , {'usertype':usertype , 'user':user})
+
+def createhw(request):
+    if request.method == "POST":
+        fname = request.POST.get()
 
 # Users
 
