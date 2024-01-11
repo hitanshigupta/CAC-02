@@ -8,7 +8,7 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <h6>Staff's table</h6> 
-                    <a href="{% url 'create_staff' %}" target="_blank" style="float:right;" class="btn btn-dark btn-sm mb-3">Create Staff</a>
+                    <a href="{% url 'createhw' %}" target="_blank" style="float:right;" class="btn btn-dark btn-sm mb-3">Create House Owner</a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -23,6 +23,9 @@
                                         Staff Username</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Staff Type</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Staff Status</th>
                                     
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
@@ -30,6 +33,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for i in user %}
                                 
                                 <tr>
                                     
@@ -37,31 +41,36 @@
                                         <div class="d-flex px-2 py-1">
                                             
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Name</h6>
-                                                <p class="text-xs text-secondary mb-0">Email</p>
+                                                <h6 class="mb-0 text-sm">{{ i.first_name }}{{i.last_name}}</h6>
+                                                <p class="text-xs text-secondary mb-0">{{ i.email }}</p>
                                                 
                                             </div>
                                         </div>
                                     </td>
 
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">username</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{ i.username }}</p>
+                                        
+                                    </td>
+
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">{{ i.usertype.usertype }}</p>
                                         
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                       <!-- if -->
+                                       {% if i.is_active == True %}
                                         <span class="badge badge-sm bg-gradient-success">Active</span>
-                                        <!-- else -->
+                                        {% else %}
                                         <span class="badge badge-sm bg-gradient-secondary">Inactive</span>
-                                        <!-- endif  -->
+                                        {% endif %}
                                     </td>
                                     
                                     <td class="align-middle">
-                                        
+                                        {% if i.is_active == True %}
                                         <button style="border: none;" class="badge badge-sm bg-gradient-danger" onclick="alert('Are you sure you want to Deactivate this Staff?')"><a href="" style="color:white;">Inactivate</a></button>
-                                        
+                                        {% else %}
                                         <button style="border: none;" class="badge badge-sm bg-gradient-success" onclick="alert('Are you sure you want to Activate this Staff?')"><a href="" style="color:white;">Activate</a></button>
-                                        
+                                        {% endif %}
                                     </td>
                                     <td>
                                         <!-- <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
@@ -71,6 +80,8 @@
                                     <a class="btn btn-link text-dark px-3 mb-0" onclick="alert('Are you sure you want to edit this staff?')" href=""><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
                                 </td>
                                 </tr>
+                                {% endfor %}
+                                
                               
                                 <!-- <tr>
                                     <td>

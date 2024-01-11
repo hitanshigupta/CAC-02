@@ -34,6 +34,7 @@ urlpatterns = [
 
     # House owner
     path('hwlist' , views.hwlist , name="hwlist"),
+    path('createhw' , views.createhw , name="createhw"),
 
     #Page links
 

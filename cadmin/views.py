@@ -16,16 +16,17 @@ def dashboard(request):
     staff = User.objects.filter(is_staff = True , is_superuser = False)
     staff_count = staff.count()
     student_count = User.objects.filter(is_staff = False , is_superuser = False).count()
-
-    
-
     page = "Dashbaord"
     return render(request , 'admin/dashboard.html' , {'page':page , 'noti':noti , 'user_count':user_count , 'staff_count':staff_count , 'student_count':student_count})
 
 
 def staff_dashboard(request):
     page = "Staff Dashbaord"
-    return render(request , 'staff/staff_dashboard.html')
+    return render(request , 'staff/staff_dashboard.html' , {'page':page})
+
+def hw_dashboard(request):
+    page = "House Owner Dashbaord"
+    return render(request , 'staff/staff_dashboard.html' , {'page:page'})
 
 ### ADMIN ------------------------------------------------------------------------------------------------------------------------------------
 
@@ -42,6 +43,10 @@ def admin_login(request):
             elif user.is_staff == True and user.is_superuser == False:
                 login(request , user)
                 return redirect(reverse('staff_dashboard'))
+            type = UserType.objects.get(user = user)
+        elif type.usertype == "House Owner":
+            login(request , user)
+            return redirect()
         else:
             msg = "Wrong credentials. Please try again!"
             return render(request , 'main/signin.html' , {'msg':msg})
@@ -135,13 +140,30 @@ def staff_passwordchange(request , staff_id):
 
 # HOUSE OWNER
 def hwlist(request):
-    usertype = UserType.objects.all()
     user = User.objects.all()
-    return render(request , 'admin/houseOwner/hwlist.html' , {'usertype':usertype , 'user':user})
+    usertype = UserType.objects.all()
+    page = "House Owner's List"
+    return render(request , 'admin/houseOwner/hwlist.html' , {'usertype':usertype , 'user':user , 'page':page})
 
 def createhw(request):
     if request.method == "POST":
-        fname = request.POST.get()
+        username = request.POST.get('username')
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        cpassword = request.POST.get('cpassword')
+        if cpassword == password:
+            user = User.objects.create_user(first_name = fname , last_name = lname , username = username , email = email)
+            user.set_password(password)
+            user_type = UserType.objects.create(user = user , usertype = "House Owner")
+            user_type.save()
+            return redirect('hwlist')
+        else:
+            msg = "Password and Comfirm Password didn't match! Please try again!"
+            return render(request , 'admin/houseOwner/createhw.html' , {'msg':msg})
+    page = "Create House Owner"
+    return render(request , 'admin/houseOwner/createhw.html' , {'page':page})
 
 # Users
 
@@ -199,10 +221,12 @@ def create_user(request):
             user.set_password(password)
             user.is_staff = False
             user.is_superuser = False
+            UserType.objects.create(user = user , usertype = "User")
             user.save()
             return redirect('users_list')
     page = "Create User"
     return render(request , 'admin/users/create_user.html' , {'page':page})
+
 
 
 ### Staffs -------------------------------------------------------------------------------------------------------------------------------------
