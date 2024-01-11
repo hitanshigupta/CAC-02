@@ -6,15 +6,23 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from .models import staff_details
 from .models import Notification
+from .models import UserType
 
 
-@login_required(login_url="admin_login")
+
 def dashboard(request):
     noti = Notification.objects.filter(is_read = False).order_by('-created_at')
-    page = "Dashbaord"
-    return render(request , 'admin/dashboard.html' , {'page':page , 'noti':noti})
+    user_count = User.objects.all().count()
+    staff = User.objects.filter(is_staff = True , is_superuser = False)
+    staff_count = staff.count()
+    student_count = User.objects.filter(is_staff = False , is_superuser = False).count()
 
-@login_required(login_url="admin_login")
+    
+
+    page = "Dashbaord"
+    return render(request , 'admin/dashboard.html' , {'page':page , 'noti':noti , 'user_count':user_count , 'staff_count':staff_count , 'student_count':student_count})
+
+
 def staff_dashboard(request):
     page = "Staff Dashbaord"
     return render(request , 'staff/staff_dashboard.html')
@@ -73,6 +81,8 @@ def create_staff(request):
                 user.is_staff = True
                 user.save()
                 noti = Notification.objects.create(user = user , message = "New Staff Added")
+                type = UserType.objects.create(user = user , usertype = "Staff")
+                type.save()
                 noti.save()
                 return redirect('admin_login')
             
@@ -122,6 +132,16 @@ def staff_passwordchange(request , staff_id):
             return redirect('staff_list')
 
     return render(request , 'admin/staff/password_change.html')
+
+# HOUSE OWNER
+def hwlist(request):
+    usertype = UserType.objects.all()
+    user = User.objects.all()
+    return render(request , 'admin/houseOwner/hwlist.html' , {'usertype':usertype , 'user':user})
+
+def createhw(request):
+    if request.method == "POST":
+        fname = request.POST.get()
 
 # Users
 

@@ -32,6 +32,9 @@ urlpatterns = [
     path('user_password_change/<int:user_id>' , views.user_password_change , name="user_password_change"),
     path('create_user' , views.create_user , name="create_user"),
 
+    # House owner
+    path('hwlist' , views.hwlist , name="hwlist"),
+
     #Page links
 
     ### Staffs ------------------------------------------------------------------------------------------------------------------------------------
@@ -48,6 +51,6 @@ urlpatterns = [
 
         #Page links
         path('house_requests' , views.house_requests , name="house_requests"),
-        path('profile/<int:staff_id>' , views.profile , name="profile")
+        path('profile/<int:staff_id>' , views.profile , name="profile"),
 
 ]
