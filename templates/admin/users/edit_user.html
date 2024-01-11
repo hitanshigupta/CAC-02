@@ -1,0 +1,83 @@
+{% extends 'bases/adminbase.html' %}
+{% load static %}
+{% block content %}
+<div class="card shadow-lg mx-4 card-profile-bottom">
+    <div class="card-body p-3">
+        <div class="row gx-4">
+            <div class="col-auto">
+                <div class="avatar avatar-xl position-relative">
+                    <img src="{% static 'img/team-1.jpg' %}" alt="profile_image"
+                        class="w-100 border-radius-lg shadow-sm">
+                </div>
+            </div>
+            <div class="col-auto my-auto">
+                <div class="h-100">
+                    <h5 class="mb-1">
+                        {{user.first_name}} {{user.last_name}}
+                    </h5>
+                    <p class="mb-0 font-weight-bold text-sm">
+                        {% if user.is_staff == False and user.is_superuser == False %}
+                        User
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <div class="d-flex align-items-center">
+                        <p class="mb-0">Edit Profile</p>
+
+                    </div>
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        <p class="text-uppercase text-sm">User Information</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Username</label>
+                                    <input class="form-control" disabled name="username" value="{{user.username}}"
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Email address</label>
+                                    <input class="form-control" name="email" value="{{user.email}}" type="email">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">First name</label>
+                                    <input class="form-control" name="fname" type="text" value="{{user.first_name}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Last name</label>
+                                    <input class="form-control" name="lname" value="{{user.last_name}}" type="text">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm ms-auto">Update</button>
+                            <p>Wanna change password? <a href="{% url 'user_password_change' user_id=user.id %}">Click
+                                    here!</a></p>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+</form>
+{% endblock content %}

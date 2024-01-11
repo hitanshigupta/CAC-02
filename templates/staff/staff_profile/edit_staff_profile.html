@@ -1,0 +1,172 @@
+{% extends 'bases/staffbase.html' %}
+{% load static %}
+{% block content %}
+<div class="card shadow-lg mx-4 card-profile-bottom">
+  <div class="card-body p-3">
+    <div class="row gx-4">
+      <div class="col-auto">
+        <div class="avatar avatar-xl position-relative">
+
+          <img src="{{ staff.staff_img.url }}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+        </div>
+      </div>
+      <div class="col-auto my-auto">
+        <div class="h-100">
+          <h5 class="mb-1">
+            {{ staff.first_name }} {{staff.last_name}}
+          </h5>
+          <p class="mb-0 font-weight-bold text-sm">
+            Staff
+          </p>
+        </div>
+      </div>
+
+    </div>
+    <button style="margin-top: -4%; float: right;" type="submit" 
+    class="btn btn-primary btn-sm ms-auto"><a href="{% url 'edit_staff_profile' user_id=user.id %}" style="color:white;">Edit profile</a></button>
+  </div>
+</div>
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header pb-0">
+
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="card-body">
+            <p class="text-uppercase text-sm">Staff Information</p>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">Username</label>
+                  <input class="form-control" type="text" disabled value="{{user.username}}">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">Email address</label>
+                  <input class="form-control" type="email" disabled value="{{user.email}}">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">First name</label>
+                  <input class="form-control" type="text" disabled value="{{user.first_name}}">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">Last name</label>
+                  <input class="form-control" type="text" disabled value="{{user.last_name}}">
+                </div>
+              </div>
+            </div>
+            <hr class="horizontal dark">
+            <p class="text-uppercase text-sm">Contact Information</p>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <input class="form-control" type="text" name="user_id" value="{{user.id}}" hidden>
+                  <input class="form-control" type="text" name="email" value="{{user.email}}" hidden>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="example-text-input"  class="form-control-label">Landmark/House no</label>
+                  <input class="form-control" value="{{staff.staff_land_mark}}"  type="text" name="staff_land_mark" placeholder="eg: Example House">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">Locality</label>
+                  <input class="form-control" value="{{staff.staff_locality}}"  type="text" name="staff_locality" placeholder="eg: Thicket Street">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">City</label>
+                  <input class="form-control" value="{{staff.staff_city}}"  type="text" name="staff_city" placeholder="eg: Lavasa">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">State</label>
+                  <input class="form-control" value="{{staff.staff_state}}"  type="text" name="staff_state" placeholder="eg: Maharastra">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">Country</label>
+                  <input class="form-control" value="{{staff.staff_country}}"  type="text" name="staff_country" placeholder="eg: India">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">Postal code</label>
+                  <input class="form-control" value="{{staff.staff_pin}}"  type="text" name="staff_pin" placeholder="eg: 897605">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">Phone Number</label>
+                  <input class="form-control" value="{{staff.staff_phone}}"  type="text" name="staff_phone" placeholder="9012345677">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">Date of Birth</label>
+                  <input class="form-control" value="{{staff.staff_dob.year}}-{{staff.staff_dob.month}}-{{staff.staff_dob.day}}"  name="staff_dob" type="text">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                    <label for="example-text-input" class="form-control-label">Staff Image</label>
+                    <input class="form-control"  name="staff_img" value="{{staff.staff_img}}"
+                        type="text" hidden>
+                    <input class="form-control"  name="new_staff_img"
+                        type="file">
+                </div>
+            </div>
+            </div>
+          </div>
+          <center><button type="submit" class="btn btn-primary btn-sm ms-auto">Update</button></center>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-profile">
+        <img src="{% static 'img/bg-profile.jpg' %}" alt="Image placeholder" class="card-img-top">
+        <div class="row justify-content-center">
+          <div class="col-4 col-lg-4 order-lg-2">
+            <div class="mt-n4 mt-lg-n6 mb-4 mb-lg-0">
+              <a href="javascript:;">
+                <img src="{{ staff.staff_img.url }}" class="rounded-circle img-fluid border border-2 border-white">
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-body pt-0">
+          
+          <div class="text-center mt-4">
+            <h5>
+              {{ user.first_name }} {{ user.last_name }} <span class="font-weight-light">, {{ staff.staff_dob }}</span>
+            </h5>
+            <div class="h6 font-weight-300">
+              <i class="ni location_pin mr-2"></i>{{staff.staff_state}} , {{staff.staff_country}}
+            </div>
+            <div class="h6 mt-4">
+              <i class="ni business_briefcase-24 mr-2"></i>E-mail : {{user.email}}
+            </div>
+            <div>
+              <i class="ni education_hat mr-2"></i>{{staff.staff_phone}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
