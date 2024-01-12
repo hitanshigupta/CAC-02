@@ -160,6 +160,7 @@ def createhw(request):
         if cpassword == password:
             user = User.objects.create_user(first_name = fname , last_name = lname , username = username , email = email)
             user.set_password(password)
+            user.save()
             user_type = UserType.objects.create(user = user , usertype = "House Owner")
             user_type.save()
             return redirect('hwlist')
