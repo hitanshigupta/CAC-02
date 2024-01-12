@@ -55,4 +55,12 @@ urlpatterns = [
         path('house_requests' , views.house_requests , name="house_requests"),
         path('profile/<int:staff_id>' , views.profile , name="profile"),
 
+
+    ### House owner -------------------------------------------------------------------------------------------------------------------------------
+
+        #House 
+        path('create_house' , views.create_house , name="create_house"),
+
+
+
 ]

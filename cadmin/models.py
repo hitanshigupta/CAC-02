@@ -25,3 +25,16 @@ class Notification(models.Model):
     is_read = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
+class House(models.Model):
+    hs_owner = models.ForeignKey(User, on_delete = models.CASCADE , default=1)
+    hs_number = models.CharField(max_length = 50 , default = "Not specified")
+    hs_street = models.CharField(max_length = 50 , default = "Not specified")
+    hs_city = models.CharField(max_length = 50 , default = "Lavasa")
+    hs_state = models.CharField(max_length = 50 , default = "Maharastra")
+    hs_country = models.CharField(max_length = 50 , default = "India")
+    hs_pin = models.BigIntegerField(default = "412112")
+    hs_bhk = models.CharField(max_length = 6 , default = "Not specified")
+    hs_rent = models.BigIntegerField(default = "0")
+    hs_desc = models.TextField(default = "Not specified")
+    hs_status = models.BooleanField(default = True)
+
