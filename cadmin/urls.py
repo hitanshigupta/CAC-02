@@ -15,6 +15,7 @@ urlpatterns = [
     path('dashboard' , views.dashboard , name="dashboard"),
     path('staff_dashboard' , views.staff_dashboard , name="staff_dashboard"),
     path('read_msg/<int:msg_id>' , views.read_msg , name="read_msg"),
+    path('hw_dashboard' , views.hw_dashboard , name="hw_dashboard"),
 
     ### Admin ------------------------------------------------------------------------------------------------------------------------------------
 
