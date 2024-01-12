@@ -16,7 +16,7 @@ class staff_details(models.Model):
     staff_pin = models.IntegerField(null = True)
     staff_phone = models.BigIntegerField()
     staff_dob = models.DateField()
-    staff_img = models.ImageField(upload_to='images/' , null=True)
+    staff_img = models.ImageField(upload_to='images/' , null=True , blank=True)
     staff_status = models.BooleanField(default=True)
 
 class Notification(models.Model):
