@@ -26,7 +26,7 @@ def staff_dashboard(request):
 
 def hw_dashboard(request):
     page = "House Owner Dashbaord"
-    return render(request , 'HouseOwner/main/dashboard.html' , {'page':page})
+    return render(request , 'HouseOwner/dashboard.html' , {'page':page})
 
 ### ADMIN ------------------------------------------------------------------------------------------------------------------------------------
 
@@ -355,3 +355,13 @@ def edit_staff_profile(request , user_id):
         return redirect('profile' , staff_id = user_id)
     page = "Edit staff profile"
     return render(request , 'staff/staff_profile/edit_staff_profile.html' , {'user':user,'staff':staff,'page':page})
+
+
+
+
+
+### House owner ------------------------------------------------------------------------------------------------------------------------------
+
+def create_house(request):
+    page = "Create Houses"
+    return render(request , 'HouseOwner/House/create_house.html' , {'page':page})
