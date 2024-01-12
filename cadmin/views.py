@@ -9,7 +9,7 @@ from .models import Notification
 from .models import UserType
 
 
-
+@login_required(login_url='admin_login')
 def dashboard(request):
     noti = Notification.objects.filter(is_read = False).order_by('-created_at')
     user_count = User.objects.all().count()
@@ -26,7 +26,7 @@ def staff_dashboard(request):
 
 def hw_dashboard(request):
     page = "House Owner Dashbaord"
-    return render(request , 'staff/staff_dashboard.html' , {'page:page'})
+    return render(request , 'HouseOwner/main/dashboard.html' , {'page':page})
 
 ### ADMIN ------------------------------------------------------------------------------------------------------------------------------------
 
@@ -35,18 +35,22 @@ def admin_login(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(username = username , password = password)
+        user = authenticate(request,username = username , password = password)
+        print(user)
         if user is not None and user.is_active:
+            userType = None
+            print(UserType.objects.filter(user_id=user.id))
+            if UserType.objects.filter(user_id=user.id):
+                userType = UserType.objects.get(user_id=user.id)
             if user.is_superuser == True and user.is_staff == True:
                 login(request , user)
                 return redirect(reverse('dashboard'))
             elif user.is_staff == True and user.is_superuser == False:
                 login(request , user)
                 return redirect(reverse('staff_dashboard'))
-            type = UserType.objects.get(user = user)
-        elif type.usertype == "House Owner":
-            login(request , user)
-            return redirect()
+            elif userType.usertype == "House Owner":
+                login(request , user)
+                return redirect('hw_dashboard')
         else:
             msg = "Wrong credentials. Please try again!"
             return render(request , 'main/signin.html' , {'msg':msg})
