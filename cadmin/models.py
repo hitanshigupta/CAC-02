@@ -5,7 +5,7 @@ class UserType(models.Model):
     user = models.OneToOneField(User , on_delete=models.CASCADE , related_name='usertype')
     usertype = models.CharField(max_length=20)
 
-class user_details(models.Model):
+class staff_details(models.Model):
     user_id = models.IntegerField()
     staff_email = models.EmailField()
     staff_land_mark = models.CharField(max_length = 70 , default = "Not specified")
