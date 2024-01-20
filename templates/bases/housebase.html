@@ -20,6 +20,8 @@
   <link href="{% static 'admin/css/nucleo-svg.css' %}" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="{% static 'admin/css/argon-dashboard.css' %}" rel="stylesheet" />
+  <script src="https://cdn.tiny.cloud/1/wht2o5zww6dotbq8v1tr568eaerqilm5btvp4css8cjrwy2l/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -44,11 +46,11 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="{% url 'create_house' %}">
+          <a class="nav-link " href="{% url 'house_list' %}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Add House</span>
+            <span class="nav-link-text ms-1">House List</span>
           </a>
         </li>
         <li class="nav-item">

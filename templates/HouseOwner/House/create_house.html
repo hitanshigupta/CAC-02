@@ -17,10 +17,10 @@
             <div class="col-auto my-auto">
                 <div class="h-100">
                     <h5 class="mb-1">
-                        Create Staff
+                        Create House
                     </h5>
                     <p class="mb-0 font-weight-bold text-sm">
-                        Fill out all the Text fields for creating the Staff!
+                        Fill out all the Text fields for creating your house!
                     </p>
                 </div>
             </div>
@@ -36,53 +36,74 @@
             <div class="card">
                 <div class="card-header pb-0">
                     <div class="d-flex align-items-center">
-                        <p class="mb-0">Create Staff</p>
+                        <p class="mb-0">Create House form</p>
 
                     </div>
                 </div>
                 <form method="POST">
                     {% csrf_token %}
                     <div class="card-body">
-                        <p class="text-uppercase text-sm">Staff Information</p>
+                        <p class="text-uppercase text-sm">House Information</p>
                         <div class="row">
-                            
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">First name</label>
-                                    <input class="form-control" name="fname" placeholder="eg : John" type="text" >
+                                    <label for="example-text-input" class="form-control-label">House Number</label>
+                                    <input class="form-control" name="hs_number" placeholder="eg : Villa no: 70" type="text" >
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Last name</label>
-                                    <input class="form-control" name="lname" placeholder="eg : Doe"  type="text">
+                                    <label for="example-text-input" class="form-control-label">Street Name</label>
+                                    <input class="form-control" name="hs_street" placeholder="eg : Portfino"  type="text">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Username</label>
-                                    <input class="form-control" name="username" placeholder="eg : John_doe"
+                                    <label for="example-text-input" class="form-control-label">Cityname</label>
+                                    <input class="form-control" name="hs_city" placeholder="eg : Lavasa"
                                         type="text">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Email address</label>
-                                    <input class="form-control" name="email" placeholder="eg : johndoe@example.com"  type="email">
+                                    <label for="example-text-input" class="form-control-label">State name</label>
+                                    <input class="form-control" name="hs_state" placeholder="eg : Maharastra"  type="text">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Password</label>
-                                    <input class="form-control" name="password" type="password">
+                                    <label for="example-text-input" class="form-control-label">Country Name</label>
+                                    <input class="form-control" placeholder="eg : India" name="hs_country" type="text">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Confirm password</label>
-                                    <input class="form-control" name="cpassword"  type="text">
+                                    <label for="example-text-input" class="form-control-label">PIN No</label>
+                                    <input class="form-control" name="hs_pin" placeholder="eg : 123456" type="number">
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">BHK</label>
+                                    <input class="form-control" name="hs_bhk" placeholder="eg : 4BHK" type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Rent Price</label>
+                                    <input class="form-control" name="hs_rent" placeholder="eg : Rs.12000" type="text">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">House Description</label>
+                                    <textarea id="basic-example" name="hs_desc">
+
+                                    </textarea>
+                                </div>
+                            </div>
+                            
                             <button type="submit" class="btn btn-primary btn-sm ms-auto">Update</button>
                         </form>
                         </div>
@@ -94,5 +115,26 @@
 
     </div>
 </div>
+
+<script>
+
+tinymce.init({
+  selector: 'textarea#basic-example',
+  height: 500,
+  menubar: false,
+  plugins: [
+    'advlist autolink lists link image charmap print preview anchor',
+    'searchreplace visualblocks code fullscreen',
+    'insertdatetime media table paste code help wordcount'
+  ],
+  toolbar: 'undo redo | formatselect | ' +
+  'bold italic backcolor | alignleft aligncenter ' +
+  'alignright alignjustify | bullist numlist outdent indent | ' +
+  'removeformat | help',
+  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+});
+
+
+</script>
 
 {% endblock content %}
