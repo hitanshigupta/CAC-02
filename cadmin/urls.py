@@ -36,6 +36,7 @@ urlpatterns = [
     # House owner
     path('hwlist' , views.hwlist , name="hwlist"),
     path('createhw' , views.createhw , name="createhw"),
+    path('edit_hw/<int:h_id>' , views.edit_hw , name="edit_hw"),
 
     #Page links
 

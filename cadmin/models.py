@@ -38,3 +38,8 @@ class House(models.Model):
     hs_desc = models.TextField(default = "Not specified")
     hs_status = models.BooleanField(default = True)
 
+class h_img(models.Model):
+    h_id = models.ForeignKey(House, on_delete = models.CASCADE , default=0)
+    img = models.ImageField(upload_to='House Images')
+    img_status = models.BooleanField(default = True)
+

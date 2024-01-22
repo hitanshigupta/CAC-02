@@ -8,6 +8,7 @@ from .models import staff_details
 from .models import Notification
 from .models import UserType
 from .models import House
+from .models import h_img
 
 
 @login_required(login_url='admin_login')
@@ -41,7 +42,6 @@ def admin_login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
-        print(user)
         if user is not None and user.is_active:
             userType = None
             print(UserType.objects.filter(user_id=user.id))
@@ -158,10 +158,9 @@ def staff_passwordchange(request, staff_id):
 
 # HOUSE OWNER
 def hwlist(request):
-    user = User.objects.all()
-    usertype = UserType.objects.all()
+    hw_user = User.objects.filter(usertype__usertype="House Owner")
     page = "House Owner's List"
-    return render(request, 'admin/houseOwner/hwlist.html', {'usertype': usertype, 'user': user, 'page': page})
+    return render(request, 'admin/houseOwner/hwlist.html', {'user':hw_user,'page': page})
 
 
 def createhw(request):
@@ -416,7 +415,28 @@ def houseStatusChange(request , h_id):
     if house.hs_status == True:
         house.hs_status = False
         house.save()
+        return redirect('house_list')
     elif house.hs_status == False:
         house.hs_status = True
         house.save()
+        return redirect('house_list')
+
+def edit_hw(request , h_id):
+    hw = House.objects.get(id=h_id)
+    image = h_img.objects.get(h_id = h_id)
+    if request.method == "POST":
+        hw.hs_owner = request.user
+        hw.hs_number = request.POST.get('hs_number')
+        hw.hs_street = request.POST.get('hs_street')
+        hw.hs_city = request.POST.get('hs_city')
+        hw.hs_state = request.POST.get('hs_state')
+        hw.hs_country = request.POST.get('hs_country')
+        hw.hs_pin = request.POST.get('hs_pin')
+        hw.hs_bhk = request.POST.get('hs_bhk')
+        hw.hs_rent = request.POST.get('hs_rent')
+        hw.hs_desc = request.POST.get('hs_desc')
+        hw.save()
+        return redirect('house_list')
+    page = "Edit House"
+    return render(request, 'HouseOwner/House/edit_house.html' , {'page': page , 'hw':hw , 'image':image})
 
