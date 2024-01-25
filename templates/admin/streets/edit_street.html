@@ -1,0 +1,81 @@
+{% extends 'bases/adminbase.html' %}
+{% load static %}
+{% block content %}
+<div class="card shadow-lg mx-4 card-profile-bottom">
+    <div class="card-body p-3">
+        <div class="row gx-4">
+
+            <div class="col-auto my-auto">
+                <div class="h-100">
+                    <h5 class="mb-1">
+                        {{street.Street_name}}
+                    </h5>
+                    <p class="mb-0 font-weight-bold text-sm">
+                       Street
+                    </p>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <div class="d-flex align-items-center">
+                        <p class="mb-0">Edit Street</p>
+
+                    </div>
+                </div>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        <p class="text-uppercase text-sm">Street Information</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Street Name</label>
+                                    <input class="form-control"  name="s_name" value="{{street.Street_name}}"
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Street address</label>
+                                    <input class="form-control" name="s_address" value="{{street.Street_address}}" type="text">
+                                </div>
+                            </div>
+                                    <input class="form-control" name="s_image" type="text" value="{{street.Street_image}}" disabled hidden>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Street Image</label>
+                                    <input class="form-control" name="new_s_image" type="file" >
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-sm ms-auto">Update</button>
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+</form>
+{% endblock content %}

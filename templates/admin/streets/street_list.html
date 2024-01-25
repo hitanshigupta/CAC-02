@@ -1,4 +1,4 @@
-{% extends 'bases/housebase.html' %}
+{% extends 'bases/adminbase.html' %}
 {% load static %}
 {% block content %}
 <!-- End Navbar -->
@@ -7,8 +7,8 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h6>House table</h6>
-                    <a href="{% url 'create_house' %}" target="_blank" style="float:right;" class="btn btn-dark btn-sm mb-3">Create House</a>
+                    <h6>Street's table</h6>
+                    <a href="{% url 'create_street' %}" target="_blank" style="float:right;" class="btn btn-dark btn-sm mb-3">Create Streets</a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -16,78 +16,54 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        House Owner Name</th>
-                                   
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        House Address</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        House BHK</th>
+                                        Street Name</th>
 
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        House Rent</th>
-
+                                        Street Address</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        House Image</th>
+                                        Street Image</th>
 
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        House Status</th>
-
-                                    
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Edition</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for i in house %}
+                                {% for i in street %}
                                 <tr>
-                                    
+
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                            
+
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">{{i.hs_owner}}</h6>
-                                                <p class="text-xs text-secondary mb-0">{{i.email}}</p>
-                                                
+                                                <h6 class="mb-0 text-sm">{{i.Street_name}}</h6>
+
                                             </div>
                                         </div>
                                     </td>
 
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ i.street.Street_name }}</p>
-                                    </td>
+                                        <p class="text-xs font-weight-bold mb-0">{{i.Street_address}}</p>
 
-                                <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ i.hs_bhk }}</p>
                                     </td>
                                 <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ i.hs_rent }}</p>
+                                    <a href="{{ i.Street_image }}" ><p class="text-xs font-weight-bold mb-0">{{i.Street_image.url}}</p></a>
+
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        {% if images %}
-                                            {{ images }}
+                                        {% if i.Street_status == True %}
+                                        <span class="badge badge-sm bg-gradient-success">Active</span>
                                         {% else %}
-                                            <p class="text-xs font-weight-bold mb-0"> <a style="color: #ff0000;" href="#">Click here to add images.</a></p>
+                                        <span class="badge badge-sm bg-gradient-secondary">Inactive</span>
                                         {% endif %}
                                     </td>
-                                <td>
-                                    {% if i.hs_status == True %}
-                                        <span class="badge badge-sm bg-gradient-success">Active</span>
-                                    {% else %}
-                                        <span class="badge badge-sm bg-gradient-secondary">Inactive</span>
-                                    {% endif %}
 
-                                    </td>
-                                    
                                     <td class="align-middle">
-                                        {% if i.hs_status == True %}
-                                        <button style="border: none;" class="badge badge-sm bg-gradient-danger" onclick="alert('Are you sure you want to Deactivate this Staff?')"><a href="{% url 'houseStatusChange' h_id=i.id %}" style="color:white;">Inactivate</a></button>
+                                        {% if i.Street_status == True %}
+                                        <button style="border: none;" class="badge badge-sm bg-gradient-danger" onclick="alert('Are you sure you want to Deactivate this Street?')"><a href="{% url 'streetStatusChange' id=i.id %}" style="color:white;">Inactivate</a></button>
                                         {% else %}
-                                        <button style="border: none;" class="badge badge-sm bg-gradient-success" onclick="alert('Are you sure you want to Activate this Staff?')"><a href="{% url 'houseStatusChange' h_id=i.id %}" style="color:white;">Activate</a></button>
+                                        <button style="border: none;" class="badge badge-sm bg-gradient-success" onclick="alert('Are you sure you want to Activate this Street?')"><a href="{% url 'streetStatusChange' id=i.id %}" style="color:white;">Activate</a></button>
                                         {% endif %}
                                     </td>
                                     <td>
@@ -95,14 +71,14 @@
                                         data-toggle="tooltip" data-original-title="Edit user">
                                         Edit
                                     </a> -->
-                                    <a class="btn btn-link text-dark px-3 mb-0" onclick="alert('Are you sure you want to edit this staff?')" href="{% url 'edit_hw' h_id=i.id %}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                                    <a class="btn btn-link text-dark px-3 mb-0" onclick="alert('Are you sure you want to edit this Street?')" href="{% url 'edit_street' id=i.id %}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
                                 </td>
                                 </tr>
                                 {% endfor %}
                                 <!-- <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                            
+
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">Alexa Liras</h6>
                                                 <p class="text-xs text-secondary mb-0">alexa@creative-tim.com</p>
@@ -129,7 +105,7 @@
                                 <!-- <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                            
+
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">Laurent Perrier</h6>
                                                 <p class="text-xs text-secondary mb-0">laurent@creative-tim.com</p>
@@ -156,7 +132,7 @@
                                 <!-- <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                            
+
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">Michael Levi</h6>
                                                 <p class="text-xs text-secondary mb-0">michael@creative-tim.com</p>
@@ -183,7 +159,7 @@
                                 <!-- <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                            
+
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">Richard Gran</h6>
                                                 <p class="text-xs text-secondary mb-0">richard@creative-tim.com</p>
@@ -210,7 +186,7 @@
                                 <!-- <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                            
+
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">Miriam Eric</h6>
                                                 <p class="text-xs text-secondary mb-0">miriam@creative-tim.com</p>
