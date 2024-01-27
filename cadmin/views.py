@@ -9,6 +9,7 @@ from .models import Notification
 from .models import UserType
 from .models import House
 from .models import h_img
+from .models import Streets
 
 
 @login_required(login_url='admin_login')
@@ -160,7 +161,7 @@ def staff_passwordchange(request, staff_id):
 def hwlist(request):
     hw_user = User.objects.filter(usertype__usertype="House Owner")
     page = "House Owner's List"
-    return render(request, 'admin/houseOwner/hwlist.html', {'user':hw_user,'page': page})
+    return render(request, 'admin/houseOwner/hwlist.html', {'user': hw_user, 'page': page})
 
 
 def createhw(request):
@@ -250,6 +251,54 @@ def create_user(request):
             return redirect('users_list')
     page = "Create User"
     return render(request, 'admin/users/create_user.html', {'page': page})
+
+
+# STREETS
+
+def street_list(request):
+    street = Streets.objects.all()
+    return render(request, 'admin/streets/street_list.html', {'street': street})
+
+
+def create_street(request):
+    street = Streets.objects.all()
+    if request.method == "POST":
+        Street_name = request.POST.get("s_name")
+        Street_address = request.POST.get('s_address')
+        Street_image = request.FILES['s_image']
+        st = Streets.objects.create(Street_name=Street_name, Street_address=Street_address, Street_image=Street_image)
+        st.Street_status = True
+        st.save()
+        return redirect('street_list')
+    page = "Create Street"
+    return render(request, 'admin/streets/create_street.html', {'page': page})
+
+
+def streetStatusChange(request, id):
+    street = Streets.objects.get(id=id)
+    if street.Street_status is True:
+        street.Street_status = False
+        street.save()
+        return redirect('street_list')
+    else:
+        street.Street_status = True
+        street.save()
+        return redirect('street_list')
+
+
+def edit_street(request, id):
+    street = Streets.objects.get(id=id)
+    if request.method == "POST":
+        street.Street_name = request.POST.get('s_name')
+        street.Street_address = request.POST.get('s_address')
+        if 'new_s_image' in request.FILES and request.FILES['new_s_image'].size > 0:
+            street.Street_image = request.FILES['new_s_image']
+        elif 's_image' in request.POST and request.POST['s_image']:
+            street.Street_image = request.POST['s_image']
+        street.save()
+        return redirect('street_list')
+    page = "Edit Street"
+    return render(request, 'admin/streets/edit_street.html', {'page': page, 'street': street})
 
 
 ### Staffs -------------------------------------------------------------------------------------------------------------------------------------
@@ -351,6 +400,7 @@ def create_profile(request):
                                      staff_dob=staff_dob,
                                      staff_img=staff_img
                                      )
+        staff_details.save()
         return redirect('profile', staff_id=user_id)
     page = "Create Staff Profile"
     return render(request, 'staff/staff_profile/create_profile.html', {'page': page})
@@ -390,10 +440,11 @@ def house_list(request):
 
 
 def create_house(request):
+    street = Streets.objects.all()
     if request.method == "POST":
         hs_owner = request.user
         hs_number = request.POST.get('hs_number')
-        hs_street = request.POST.get('hs_street')
+        street = request.POST.get('street')
         hs_city = request.POST.get('hs_city')
         hs_state = request.POST.get('hs_state')
         hs_country = request.POST.get('hs_country')
@@ -401,16 +452,18 @@ def create_house(request):
         hs_bhk = request.POST.get('hs_bhk')
         hs_rent = request.POST.get('hs_rent')
         hs_desc = request.POST.get('hs_desc')
-        house_details = House.objects.create(hs_owner=hs_owner, hs_number=hs_number, hs_street=hs_street,
+        street_instance = Streets.objects.get(Street_name=street)
+        house_details = House.objects.create(hs_owner=hs_owner, hs_number=hs_number, street=street_instance,
                                              hs_city=hs_city, hs_state=hs_state, hs_country=hs_country,
                                              hs_pin=hs_pin, hs_bhk=hs_bhk, hs_rent=hs_rent, hs_desc=hs_desc)
         house_details.hs_status = False
         house_details.save()
         return redirect('house_list')
     page = "Create Houses"
-    return render(request, 'HouseOwner/House/create_house.html', {'page': page})
+    return render(request, 'HouseOwner/House/create_house.html', {'page': page, "street": street})
 
-def houseStatusChange(request , h_id):
+
+def houseStatusChange(request, h_id):
     house = House.objects.get(id=h_id)
     if house.hs_status == True:
         house.hs_status = False
@@ -421,13 +474,14 @@ def houseStatusChange(request , h_id):
         house.save()
         return redirect('house_list')
 
-def edit_hw(request , h_id):
+
+def edit_hw(request, h_id):
     hw = House.objects.get(id=h_id)
-    image = h_img.objects.get(h_id = h_id)
+    street = Streets.objects.all()
     if request.method == "POST":
         hw.hs_owner = request.user
         hw.hs_number = request.POST.get('hs_number')
-        hw.hs_street = request.POST.get('hs_street')
+        street = request.POST.get('street')
         hw.hs_city = request.POST.get('hs_city')
         hw.hs_state = request.POST.get('hs_state')
         hw.hs_country = request.POST.get('hs_country')
@@ -435,8 +489,9 @@ def edit_hw(request , h_id):
         hw.hs_bhk = request.POST.get('hs_bhk')
         hw.hs_rent = request.POST.get('hs_rent')
         hw.hs_desc = request.POST.get('hs_desc')
+        street_instance = Streets.objects.get(Street_name = street)
+        hw.street = street_instance
         hw.save()
         return redirect('house_list')
     page = "Edit House"
-    return render(request, 'HouseOwner/House/edit_house.html' , {'page': page , 'hw':hw , 'image':image})
-
+    return render(request, 'HouseOwner/House/edit_house.html', {'page': page, 'hw': hw, 'street': street})

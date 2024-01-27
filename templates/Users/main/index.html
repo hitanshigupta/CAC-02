@@ -102,123 +102,125 @@
       </p>
     </div>
     <div class="sale_container">
+        {% for i in street %}
       <div class="box">
         <div class="img-box">
-          <img src="{% static 'users/images/portofino.png' %}" alt="">
+          <img src="{{ i.Street_image.url }}" alt="">
         </div>
         <div class="detail-box">
           <h6>
-            <a href=" " >Portofino Street Apartments </a>
+              {{ i.Street_name}}
           </h6>
           <p>
-            305, Dasve, LAVASA CITY, Lavasa - 412112 (Mulshi Village)
+           {{ i.Street_address }}
           </p>
         </div>
       </div>
-      <div class="box">
-        <div class="img-box">
-          <img src="{% static 'users/images/celebrations.jpeg' %}" alt="">
-        </div>
-        <div class="detail-box">
-          <h6>
-            <a href=" " >Celebrations Girls Hostel </a>
-          </h6>
-          <p>
-            Taluka Mulshi, 3, Dasve Circle, opposite Christ College, Lavasa, Maharashtra 412112
-          </p>
-        </div>
-      </div>
-      <div class="box">
-        <div class="img-box">
-          <img src="{% static 'users/images/thicket.jpeg' %}" alt="">
-        </div>
-        <div class="detail-box">
-          <h6>
-            <a href=" " >Thicket Street Villas</a>
-          </h6>
-          <p>
-            Thicket St, Lavasa, Maharashtra 412112
-          </p>
-        </div>
-      </div>
-      <div class="box">
-        <div class="img-box">
-          <img src="{% static 'users/images/Residence.png' %}" alt="">
-        </div>
-        <div class="detail-box">
-          <h6>
-            <a href=" " >CHRIST RESIDENCE</a>
-          </h6>
-          <p>
-            There are many variations of passages of Lorem Ipsum available, but
-          </p>
-        </div>
-      </div>
-      <div class="box">
-        <div class="img-box">
-          <img src="{% static 'users/images/club view.png' %}" alt="">
-        </div>
-        <div class="detail-box">
-          <h6>
-            <a href=" " >Club View Apartments</a>
-          </h6>
-          <p>
-            CG32+6C4, Lavasa, Maharashtra 412112
-          </p>
-        </div>
-      </div>
-      <div class="box">
-        <div class="img-box">
-          <img src="{% static 'users/images/valley.jpeg' %}" alt="">
-        </div>
-        <div class="detail-box">
-          <h6>
-            <a href=" " >Valley Street Villas</a>
-          </h6>
-          <p>
-            CG42+4JR, Valley St, Lavasa, Maharashtra 412112
-          </p>
-        </div>
-      </div>
-      <div class="box">
-        <div class="img-box">
-          <img src="{% static 'users/images/lakeview.jpeg' %}" alt="">
-        </div>
-        <div class="detail-box">
-          <h6>
-            <a href=" " >LakeView Apartments</a>
-          </h6>
-          <p>
-            Portofino Street, 412112 Lavasa, India
-          </p>
-        </div>
-      </div>
-      <div class="box">
-        <div class="img-box">
-          <img src="{% static 'users/images/hill view.jpeg' %}" alt="">
-        </div>
-        <div class="detail-box">
-          <h6>
-            <a href=" " >Hill View Street Villas</a>
-          </h6>
-          <p>
-            Hill View Street, Dasve Town, Mulshi, Lavasa 412112
-          </p>
-        </div>
-      </div>
-      <div class="box">
-        <div class="img-box">
-          <img src="{% static 'users/images/school street.jpeg' %}" alt="">
-        </div>
-        <div class="detail-box">
-          <h6>
-            <a href=" " >School Street Villas</a>
-          </h6>
-          <p>
-            School Street, LAVASA CITY, Lavasa - 412112
-          </p>
-        </div>
-      </div>
+        {% endfor %}
+{#      <div class="box">#}
+{#        <div class="img-box">#}
+{#          <img src="{% static 'users/images/celebrations.jpeg' %}" alt="">#}
+{#        </div>#}
+{#        <div class="detail-box">#}
+{#          <h6>#}
+{#            Celebrations Girls Hostel#}
+{#          </h6>#}
+{#          <p>#}
+{#            Taluka Mulshi, 3, Dasve Circle, opposite Christ College, Lavasa, Maharashtra 412112#}
+{#          </p>#}
+{#        </div>#}
+{#      </div>#}
+{#      <div class="box">#}
+{#        <div class="img-box">#}
+{#          <img src="{% static 'users/images/thicket.jpeg' %}" alt="">#}
+{#        </div>#}
+{#        <div class="detail-box">#}
+{#          <h6>#}
+{#            Thicket Street Villas#}
+{#          </h6>#}
+{#          <p>#}
+{#            Thicket St, Lavasa, Maharashtra 412112#}
+{#          </p>#}
+{#        </div>#}
+{#      </div>#}
+{#      <div class="box">#}
+{#        <div class="img-box">#}
+{#          <img src="{% static 'users/images/Residence.png' %}" alt="">#}
+{#        </div>#}
+{#        <div class="detail-box">#}
+{#          <h6>#}
+{#            CHRIST RESIDENCE#}
+{#          </h6>#}
+{#          <p>#}
+{#            There are many variations of passages of Lorem Ipsum available, but#}
+{#          </p>#}
+{#        </div>#}
+{#      </div>#}
+{#      <div class="box">#}
+{#        <div class="img-box">#}
+{#          <img src="{% static 'users/images/club view.png' %}" alt="">#}
+{#        </div>#}
+{#        <div class="detail-box">#}
+{#          <h6>#}
+{#            Club View Apartments#}
+{#          </h6>#}
+{#          <p>#}
+{#            CG32+6C4, Lavasa, Maharashtra 412112#}
+{#          </p>#}
+{#        </div>#}
+{#      </div>#}
+{#      <div class="box">#}
+{#        <div class="img-box">#}
+{#          <img src="{% static 'users/images/valley.jpeg' %}" alt="">#}
+{#        </div>#}
+{#        <div class="detail-box">#}
+{#          <h6>#}
+{#            Valley Street Villas#}
+{#          </h6>#}
+{#          <p>#}
+{#            CG42+4JR, Valley St, Lavasa, Maharashtra 412112#}
+{#          </p>#}
+{#        </div>#}
+{#      </div>#}
+{#      <div class="box">#}
+{#        <div class="img-box">#}
+{#          <img src="{% static 'users/images/lakeview.jpeg' %}" alt="">#}
+{#        </div>#}
+{#        <div class="detail-box">#}
+{#          <h6>#}
+{#            LakeView Apartments#}
+{#          </h6>#}
+{#          <p>#}
+{#            Portofino Street, 412112 Lavasa, India#}
+{#          </p>#}
+{#        </div>#}
+{#      </div>#}
+{#      <div class="box">#}
+{#        <div class="img-box">#}
+{#          <img src="{% static 'users/images/hill view.jpeg' %}" alt="">#}
+{#        </div>#}
+{#        <div class="detail-box">#}
+{#          <h6>#}
+{#            Hill View Street Villas#}
+{#          </h6>#}
+{#          <p>#}
+{#            Hill View Street, Dasve Town, Mulshi, Lavasa 412112#}
+{#          </p>#}
+{#        </div>#}
+{#      </div>#}
+{#      <div class="box">#}
+{#        <div class="img-box">#}
+{#          <img src="{% static 'users/images/school street.jpeg' %}" alt="">#}
+{#        </div>#}
+{#        <div class="detail-box">#}
+{#          <h6>#}
+{#            School Street Villas#}
+{#          </h6>#}
+{#          <p>#}
+{#            School Street, LAVASA CITY, Lavasa - 412112#}
+{#          </p>#}
+{#        </div>#}
+{#      </div>#}
       
     </div>
     <div class="btn-box">

@@ -38,6 +38,12 @@ urlpatterns = [
     path('createhw' , views.createhw , name="createhw"),
     path('edit_hw/<int:h_id>' , views.edit_hw , name="edit_hw"),
 
+    # Streets
+    path('create_street' , views.create_street , name="create_street"),
+    path('street_list' , views.street_list , name="street_list"),
+    path('streetStatusChange/<int:id>', views.streetStatusChange, name="streetStatusChange"),
+    path('edit_street/<int:id>', views.edit_street, name="edit_street"),
+
     #Page links
 
     ### Staffs ------------------------------------------------------------------------------------------------------------------------------------

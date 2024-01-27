@@ -51,17 +51,23 @@
                                     <input class="form-control" name="hs_number" placeholder="eg : Villa no: 70" type="text" >
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Street Name</label>
-                                    <input class="form-control" name="hs_street" placeholder="eg : Portfino"  type="text">
-                                </div>
-                            </div>
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">Cityname</label>
                                     <input class="form-control" name="hs_city" placeholder="eg : Lavasa"
                                         type="text">
+                                </div>
+                            </div>
+                        <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Street Name</label>
+                                    <select id="cars" class="form-control" name="street" required>
+                                <option value="" select>--SELECT--</option>
+                                {% for i in street %}
+                                <option value="{{ i.Street_name }}">{{ i.Street_name }}</option>
+                                {% endfor %}
+                            </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
