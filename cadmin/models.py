@@ -57,5 +57,12 @@ class h_img(models.Model):
     img_status = models.BooleanField(default = True)
 
 
+class Contact_Form(models.Model):
+    name = models.CharField(max_length=40)
+    email = models.EmailField(max_length=150)
+    ph_no = models.IntegerField()
+    message = models.TextField()
+
+
 
 
