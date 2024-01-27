@@ -1,4 +1,4 @@
-{% extends 'Users/base.html' %}
+{% extends 'bases/userbase.html' %}
 {% load static %}
 {% block content %}
 <!-- slider section -->
@@ -8,15 +8,23 @@
       <div class="col-md-4 offset-md-1">
         <div class="detail-box">
           <h1>
-            <span> UniStay</span> <br> </h1>
+
+                <span> UniStay</span> <br>
+
+           </h1>
+            {% if user.is_authenticated %}
+            <h2>Welcome
+                {{ user.first_name}}! </h2>
+            {% else %}
             <h4>CHRIST Lavasa <br>
             Accomodation Management </h4>
+            {% endif %}
           
           <p>
             Find the perfect student-friendly rental – where convenience meets comfort on your academic journey."
           </p>
           <div class="btn-box">
-            <a href="" class="">
+            <a href="{% url 'user_login' %}" class="">
               Read More
             </a>
           </div>

@@ -10,6 +10,7 @@ from .models import UserType
 from .models import House
 from .models import h_img
 from .models import Streets
+from .models import Contact_Form
 
 
 @login_required(login_url='admin_login')
@@ -299,6 +300,12 @@ def edit_street(request, id):
         return redirect('street_list')
     page = "Edit Street"
     return render(request, 'admin/streets/edit_street.html', {'page': page, 'street': street})
+
+
+def contact_form(request):
+    msg = Contact_Form.objects.all()
+    page = "Contact Form List"
+    return render(request, 'admin/ContactForm/contactlist.html', {'page': page, 'msg': msg})
 
 
 ### Staffs -------------------------------------------------------------------------------------------------------------------------------------

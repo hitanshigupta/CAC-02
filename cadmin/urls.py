@@ -44,6 +44,10 @@ urlpatterns = [
     path('streetStatusChange/<int:id>', views.streetStatusChange, name="streetStatusChange"),
     path('edit_street/<int:id>', views.edit_street, name="edit_street"),
 
+    # Contact Form
+    path('contact_form', views.contact_form, name="contact_form" ),
+
+
     #Page links
 
     ### Staffs ------------------------------------------------------------------------------------------------------------------------------------
