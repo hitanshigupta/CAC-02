@@ -7,7 +7,7 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h6>Staff's table</h6> 
+                    <h6>House Owner's table</h6>
                     <a href="{% url 'createhw' %}" target="_blank" style="float:right;" class="btn btn-dark btn-sm mb-3">Create House Owner</a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -67,9 +67,9 @@
                                     
                                     <td class="align-middle">
                                         {% if i.is_active == True %}
-                                        <button style="border: none;" class="badge badge-sm bg-gradient-danger" onclick="alert('Are you sure you want to Deactivate this Staff?')"><a href="" style="color:white;">Inactivate</a></button>
+                                        <button style="border: none;" class="badge badge-sm bg-gradient-danger" onclick="alert('Are you sure you want to Deactivate this House Owner??')"><a href="{% url 'hwStatusChange' id=i.id %}" style="color:white;">Inactivate</a></button>
                                         {% else %}
-                                        <button style="border: none;" class="badge badge-sm bg-gradient-success" onclick="alert('Are you sure you want to Activate this Staff?')"><a href="" style="color:white;">Activate</a></button>
+                                        <button style="border: none;" class="badge badge-sm bg-gradient-success" onclick="alert('Are you sure you want to Activate this House Owner??')"><a href="{% url 'hwStatusChange' id=i.id %}" style="color:white;">Activate</a></button>
                                         {% endif %}
                                     </td>
                                     <td>

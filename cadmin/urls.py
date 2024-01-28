@@ -69,6 +69,10 @@ urlpatterns = [
 
     ### House owner -------------------------------------------------------------------------------------------------------------------------------
 
+        # House owner
+        path('hwStatusChange/<int:id>', views.hwStatusChange , name="hwStatusChange"),
+
+
         #House 
         path('house_list' , views.house_list , name = "house_list"),
         path('create_house' , views.create_house , name="create_house"),
