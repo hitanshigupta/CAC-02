@@ -2,24 +2,22 @@
 {% load static %}
 {% block content %}
 <!-- slider section -->
-<section class="slider_section ">
+<section class="slider_section">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-4 offset-md-1">
-        <div class="detail-box">
+        <div class="detail-box" id="head">
           <h1>
-
-                <span> UniStay</span> <br>
-
-           </h1>
-            {% if user.is_authenticated %}
-            <h2>Welcome
-                {{ user.first_name}}! </h2>
-            {% else %}
-            <h4>CHRIST Lavasa <br>
+            <span> UniStay</span> <br>
+          </h1>
+          {% if user.is_authenticated %}
+          <h2>Welcome
+            {{ user.first_name}}! </h2>
+          {% else %}
+          <h4>CHRIST Lavasa <br>
             Accomodation Management </h4>
-            {% endif %}
-          
+          {% endif %}
+
           <p>
             Find the perfect student-friendly rental – where convenience meets comfort on your academic journey."
           </p>
@@ -42,7 +40,7 @@
     <form action="">
       <div class=" form-row">
         <div class="col-md-5">
-          <input type="text" class="form-control" placeholder="Serach Your Categories ">
+          <input type="text" class="form-control" placeholder="Search Your Categories ">
         </div>
         <div class="col-md-5">
           <input type="text" class="form-control" placeholder="Location ">
@@ -63,37 +61,40 @@
 
 <!-- about section -->
 
-<!-- <section class="about_section layout_padding-bottom">
-    <div class="square-box">
-      <img src="{% static 'users/images/square.png' %}" alt="">
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="img-box">
-            <img src="{% static 'users/images/about-img.jpg' %}" alt="">
-          </div>
+<section class="about_section layout_padding-bottom">
+  <div class="square-box">
+    <img src="{% static 'users/images/square.png' %}" alt="">
+  </div>
+  <div class="container" id="about">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="img-box">
+          <img src="{% static 'users/images/lavasa.jpeg' %}" alt="" height=350px>
         </div>
-        <div class="col-md-6">
-          <div class="detail-box">
-            <div class="heading_container">
-              <h2>
-                About Our Apartment
-              </h2>
-            </div>
-            <p>
-              There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
-              in
-              some form, by injected humour, or randomised words
-            </p>
-            <a href="">
-              Read More
-            </a>
+      </div>
+      <div class="col-md-6">
+        <div class="detail-box">
+          <div class="heading_container">
+            <h2>
+              About UniStay
+            </h2>
           </div>
+          <p>
+            Welcome to <b>UniStay</b> – your premier destination for student accommodation in <b>Lavasa</b>. We
+            specialize in providing
+            hassle-free renting facilities tailored to the needs of students. With a wide range of options including
+            studio apartments, shared houses, and private rooms, we prioritize safety, comfort, and affordability. Our
+            user-friendly website makes it easy to browse, compare, and book accommodations, supported by responsive
+            customer service.<b>Find your perfect home-away-from-home with UniStay today!</b>
+          </p>
+          <a href="{% url 'user_login' %}" class="">
+            Read More
+          </a>
         </div>
       </div>
     </div>
-  </section> -->
+  </div>
+</section>
 
 <!-- end about section -->
 
@@ -101,7 +102,7 @@
 
 <section class="sale_section layout_padding-bottom">
   <div class="container-fluid">
-    <div class="heading_container">
+    <div class="heading_container" id="prop">
       <h2>
         Properties for Rent
       </h2>
@@ -110,133 +111,136 @@
       </p>
     </div>
     <div class="sale_container">
-        {% for i in street %}
+      {% for i in street %}
       <div class="box">
         <div class="img-box">
           <img src="{{ i.Street_image.url }}" alt="">
         </div>
         <div class="detail-box">
           <h6>
+            <a href="{% url 'redirect' %}">
               {{ i.Street_name}}
           </h6>
+          </a>
           <p>
-           {{ i.Street_address }}
+            {{ i.Street_address }}
           </p>
         </div>
       </div>
-        {% endfor %}
-{#      <div class="box">#}
-{#        <div class="img-box">#}
-{#          <img src="{% static 'users/images/celebrations.jpeg' %}" alt="">#}
-{#        </div>#}
-{#        <div class="detail-box">#}
-{#          <h6>#}
-{#            Celebrations Girls Hostel#}
-{#          </h6>#}
-{#          <p>#}
-{#            Taluka Mulshi, 3, Dasve Circle, opposite Christ College, Lavasa, Maharashtra 412112#}
-{#          </p>#}
-{#        </div>#}
-{#      </div>#}
-{#      <div class="box">#}
-{#        <div class="img-box">#}
-{#          <img src="{% static 'users/images/thicket.jpeg' %}" alt="">#}
-{#        </div>#}
-{#        <div class="detail-box">#}
-{#          <h6>#}
-{#            Thicket Street Villas#}
-{#          </h6>#}
-{#          <p>#}
-{#            Thicket St, Lavasa, Maharashtra 412112#}
-{#          </p>#}
-{#        </div>#}
-{#      </div>#}
-{#      <div class="box">#}
-{#        <div class="img-box">#}
-{#          <img src="{% static 'users/images/Residence.png' %}" alt="">#}
-{#        </div>#}
-{#        <div class="detail-box">#}
-{#          <h6>#}
-{#            CHRIST RESIDENCE#}
-{#          </h6>#}
-{#          <p>#}
-{#            There are many variations of passages of Lorem Ipsum available, but#}
-{#          </p>#}
-{#        </div>#}
-{#      </div>#}
-{#      <div class="box">#}
-{#        <div class="img-box">#}
-{#          <img src="{% static 'users/images/club view.png' %}" alt="">#}
-{#        </div>#}
-{#        <div class="detail-box">#}
-{#          <h6>#}
-{#            Club View Apartments#}
-{#          </h6>#}
-{#          <p>#}
-{#            CG32+6C4, Lavasa, Maharashtra 412112#}
-{#          </p>#}
-{#        </div>#}
-{#      </div>#}
-{#      <div class="box">#}
-{#        <div class="img-box">#}
-{#          <img src="{% static 'users/images/valley.jpeg' %}" alt="">#}
-{#        </div>#}
-{#        <div class="detail-box">#}
-{#          <h6>#}
-{#            Valley Street Villas#}
-{#          </h6>#}
-{#          <p>#}
-{#            CG42+4JR, Valley St, Lavasa, Maharashtra 412112#}
-{#          </p>#}
-{#        </div>#}
-{#      </div>#}
-{#      <div class="box">#}
-{#        <div class="img-box">#}
-{#          <img src="{% static 'users/images/lakeview.jpeg' %}" alt="">#}
-{#        </div>#}
-{#        <div class="detail-box">#}
-{#          <h6>#}
-{#            LakeView Apartments#}
-{#          </h6>#}
-{#          <p>#}
-{#            Portofino Street, 412112 Lavasa, India#}
-{#          </p>#}
-{#        </div>#}
-{#      </div>#}
-{#      <div class="box">#}
-{#        <div class="img-box">#}
-{#          <img src="{% static 'users/images/hill view.jpeg' %}" alt="">#}
-{#        </div>#}
-{#        <div class="detail-box">#}
-{#          <h6>#}
-{#            Hill View Street Villas#}
-{#          </h6>#}
-{#          <p>#}
-{#            Hill View Street, Dasve Town, Mulshi, Lavasa 412112#}
-{#          </p>#}
-{#        </div>#}
-{#      </div>#}
-{#      <div class="box">#}
-{#        <div class="img-box">#}
-{#          <img src="{% static 'users/images/school street.jpeg' %}" alt="">#}
-{#        </div>#}
-{#        <div class="detail-box">#}
-{#          <h6>#}
-{#            School Street Villas#}
-{#          </h6>#}
-{#          <p>#}
-{#            School Street, LAVASA CITY, Lavasa - 412112#}
-{#          </p>#}
-{#        </div>#}
-{#      </div>#}
-      
-    </div>
-    <div class="btn-box">
+      {% endfor %}
+
+      {# <div class="box">#}
+        {# <div class="img-box">#}
+          {# <img src="{% static 'users/images/celebrations.jpeg' %}" alt="">#}
+          {# </div>#}
+        {# <div class="detail-box">#}
+          {# <h6>#}
+            {# Celebrations Girls Hostel#}
+            {# </h6>#}
+          {# <p>#}
+            {# Taluka Mulshi, 3, Dasve Circle, opposite Christ College, Lavasa, Maharashtra 412112#}
+            {# </p>#}
+          {# </div>#}
+        {# </div>#}
+      {# <div class="box">#}
+        {# <div class="img-box">#}
+          {# <img src="{% static 'users/images/thicket.jpeg' %}" alt="">#}
+          {# </div>#}
+        {# <div class="detail-box">#}
+          {# <h6>#}
+            {# Thicket Street Villas#}
+            {# </h6>#}
+          {# <p>#}
+            {# Thicket St, Lavasa, Maharashtra 412112#}
+            {# </p>#}
+          {# </div>#}
+        {# </div>#}
+      {# <div class="box">#}
+        {# <div class="img-box">#}
+          {# <img src="{% static 'users/images/Residence.png' %}" alt="">#}
+          {# </div>#}
+        {# <div class="detail-box">#}
+          {# <h6>#}
+            {# CHRIST RESIDENCE#}
+            {# </h6>#}
+          {# <p>#}
+            {# There are many variations of passages of Lorem Ipsum available, but#}
+            {# </p>#}
+          {# </div>#}
+        {# </div>#}
+      {# <div class="box">#}
+        {# <div class="img-box">#}
+          {# <img src="{% static 'users/images/club view.png' %}" alt="">#}
+          {# </div>#}
+        {# <div class="detail-box">#}
+          {# <h6>#}
+            {# Club View Apartments#}
+            {# </h6>#}
+          {# <p>#}
+            {# CG32+6C4, Lavasa, Maharashtra 412112#}
+            {# </p>#}
+          {# </div>#}
+        {# </div>#}
+      {# <div class="box">#}
+        {# <div class="img-box">#}
+          {# <img src="{% static 'users/images/valley.jpeg' %}" alt="">#}
+          {# </div>#}
+        {# <div class="detail-box">#}
+          {# <h6>#}
+            {# Valley Street Villas#}
+            {# </h6>#}
+          {# <p>#}
+            {# CG42+4JR, Valley St, Lavasa, Maharashtra 412112#}
+            {# </p>#}
+          {# </div>#}
+        {# </div>#}
+      {# <div class="box">#}
+        {# <div class="img-box">#}
+          {# <img src="{% static 'users/images/lakeview.jpeg' %}" alt="">#}
+          {# </div>#}
+        {# <div class="detail-box">#}
+          {# <h6>#}
+            {# LakeView Apartments#}
+            {# </h6>#}
+          {# <p>#}
+            {# Portofino Street, 412112 Lavasa, India#}
+            {# </p>#}
+          {# </div>#}
+        {# </div>#}
+      {# <div class="box">#}
+        {# <div class="img-box">#}
+          {# <img src="{% static 'users/images/hill view.jpeg' %}" alt="">#}
+          {# </div>#}
+        {# <div class="detail-box">#}
+          {# <h6>#}
+            {# Hill View Street Villas#}
+            {# </h6>#}
+          {# <p>#}
+            {# Hill View Street, Dasve Town, Mulshi, Lavasa 412112#}
+            {# </p>#}
+          {# </div>#}
+        {# </div>#}
+      {# <div class="box">#}
+        {# <div class="img-box">#}
+          {# <img src="{% static 'users/images/school street.jpeg' %}" alt="">#}
+          {# </div>#}
+        {# <div class="detail-box">#}
+          {# <h6>#}
+            {# School Street Villas#}
+            {# </h6>#}
+          {# <p>#}
+            {# School Street, LAVASA CITY, Lavasa - 412112#}
+            {# </p>#}
+          {# </div>#}
+        {# </div>#}
+      </div>
+
+    <!-- <div class="btn-box">
       <a href="">
         Find More
       </a>
-    </div>
-  </div>
+    </div> -->
+  </div> 
 </section>
 
 <!-- end sale section -->
@@ -394,27 +398,25 @@ end price section -->
         <div class="detail-box">
           <div class="heading_container">
             <h2>
-              Very Good Deal For House
+              Your Dream Home Awaits: Get This Deal Now!
             </h2>
           </div>
           <p>
-            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
-            in
-            some form, by injected humour, or randomised words which don't look even slightly believable.
+            Discover a treasure trove of unbeatable offers on our housing website, bringing you one step closer to
+            finding your perfect dream home at an incredible value. Don't miss out on these exclusive deals!
           </p>
-          <a href="">
+          <!-- <a href="">
             Get A Quote
-          </a>
+          </a> -->
         </div>
       </div>
       <div class="col-md-6">
         <div class="img-box">
           <div class="box b1">
-            <img src="{% static 'users/images/d-1.jpg' %}" alt="">
+            <img src="{% static 'users/images/IMG1.jpeg' %}" alt="" height=200px width=900px>
           </div>
           <div class="box b1">
-            <img src="{% static 'users/images/d-2.jpg' %}" alt="">
-            
+            <img src="{% static 'users/images/room.jpeg' %}" alt="" height=200px width=900px>
           </div>
         </div>
       </div>
@@ -431,7 +433,7 @@ end price section -->
   <div class="container">
     <div class="heading_container">
       <h2>
-        Why Choose Us
+        Why Choose Us?
       </h2>
     </div>
     <div class="row">
@@ -442,7 +444,7 @@ end price section -->
           </div>
           <div class="detail-box">
             <h3 class="price">
-              1000+
+              5+
             </h3>
             <h5>
               Years of House
@@ -457,7 +459,7 @@ end price section -->
           </div>
           <div class="detail-box">
             <h3>
-              20000+
+              1000+
             </h3>
             <h5>
               Projects Delivered
@@ -472,7 +474,7 @@ end price section -->
           </div>
           <div class="detail-box">
             <h3>
-              10000+
+              2000+
             </h3>
             <h5>
               Satisfied Customers
@@ -496,11 +498,11 @@ end price section -->
         </div>
       </div>
     </div>
-    <div class="btn-box">
+    <!-- <div class="btn-box">
       <a href="">
         Get A Quote
       </a>
-    </div>
+    </div> -->
   </div>
 </section>
 
@@ -512,7 +514,7 @@ end price section -->
   <div class="container-fluid">
     <div class="heading_container">
       <h2>
-        What is Says Our Customer
+        What Says Our Customers!
       </h2>
     </div>
     <div class="client_container">
@@ -521,7 +523,7 @@ end price section -->
           <div class="carousel-item active">
             <div class="box">
               <div class="img-box">
-                <img src="{% static 'users/images/client.jpg' %}" alt="">
+                <img src="{% static 'users/images/girlicon.jpeg' %}" alt="" height=130px width=150px>
               </div>
               <div class="detail-box">
                 <h5>
@@ -529,9 +531,9 @@ end price section -->
                   <hr>
                 </h5>
                 <p>
-                  There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                  alteration
-                  in some form, by injected humour, or randomised words which don't look even slightly believable.
+                  I wanted to commend your platform for its exceptional property listings. The high-quality images,
+                  accurate descriptions, and essential details provided on each listing exceeded my expectations. This
+                  level of detail made it easy for me to make informed decisions throughout my house-hunting journey.
                 </p>
               </div>
             </div>
@@ -539,7 +541,7 @@ end price section -->
           <div class="carousel-item">
             <div class="box">
               <div class="img-box">
-                <img src="{% static 'users/images/client.jpg' %}" alt="">
+                <img src="{% static 'users/images/boy.jpeg' %}" alt="" height=130px width=150px>
               </div>
               <div class="detail-box">
                 <h5>
@@ -547,9 +549,9 @@ end price section -->
                   <hr>
                 </h5>
                 <p>
-                  There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                  alteration
-                  in some form, by injected humour, or randomised words which don't look even slightly believable.
+                  The inclusion of tenant reviews and ratings played a pivotal role in my decision-making process.
+                  Knowing about the experiences of previous tenants provided valuable insights and contributed to my
+                  confidence in choosing the right rental.
                 </p>
               </div>
             </div>
@@ -557,7 +559,7 @@ end price section -->
           <div class="carousel-item">
             <div class="box">
               <div class="img-box">
-                <img src="{% static 'users/images/client.jpg' %}" alt="">
+                <img src="{% static 'users/images/avatar.jpeg' %}" alt="" height=130px width=130px>
               </div>
               <div class="detail-box">
                 <h5>
@@ -565,9 +567,9 @@ end price section -->
                   <hr>
                 </h5>
                 <p>
-                  There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                  alteration
-                  in some form, by injected humour, or randomised words which don't look even slightly believable.
+                  I encountered a minor issue during my search and reached out to your customer support. The prompt and
+                  helpful response I received demonstrated your commitment to customer satisfaction. It's refreshing to
+                  experience such responsiveness in the online rental process.
                 </p>
               </div>
             </div>
