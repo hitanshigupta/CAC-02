@@ -63,5 +63,6 @@ def user_logout(request):
     logout(request)
     return redirect('user_login')
 
-def redirect(request):
-    return render(request, 'Users/main/redirect.html')
+
+
+

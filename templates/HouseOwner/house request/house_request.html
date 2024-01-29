@@ -1,4 +1,4 @@
-{% extends 'bases/staffbase.html' %}
+{% extends 'bases/housebase.html' %}
 {% load static %}
 {% block content %}
 <!-- End Navbar -->
@@ -7,7 +7,7 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h6>House Request Table</h6> 
+                    <h6>House Request Table</h6>
                     <!-- <a href="#" target="_blank" style="float:right;" class="btn btn-dark btn-sm mb-3">Create User</a> -->
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -19,7 +19,7 @@
                                         Student</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         House street</th>
-                                   
+
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         House Number</th>
@@ -30,7 +30,7 @@
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Sharing Type</th>
-                                    
+
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                                 </tr>
                             </thead>
@@ -38,25 +38,25 @@
                                 <!-- for loop  -->
                                 {% for i in req %}
                                 <tr>
-                                    
+
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                            
+
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">{{ i.student.username }}</h6>
                                                 <p class="text-xs text-secondary mb-0">{{ i.student.id }}</p>
-                                                
+
                                             </div>
                                         </div>
                                     </td>
 
                                     <td>
                                         <p class="text-xs font-weight-bold mb-0">{{ i.h_id.street.Street_name }}</p>
-                                        
+
                                     </td>
                                     <td>
                                         <p class="text-xs font-weight-bold mb-0">{{ i.h_id.hs_number }}</p>
-              
+
                                     </td>
                                     <td>
                                         <p class="text-xs font-weight-bold mb-0">{{ i.h_id.hs_owner }}</p>
@@ -67,30 +67,29 @@
                                         <p class="text-xs font-weight-bold mb-0">{{ i.sharing }}</p>
 
                                     </td>
-                                    {% if i.req_type == 0 %}
-                                        <td class="align-middle text-center text-sm">
-                                            <button style="border: none;" class="badge badge-sm bg-gradient-success" onclick="alert('Are you sure you want to Accept this request?')"><a href="{% url 'req_accept' id=i.id %}" style="color:white;">Accept</a></button>
-                                        </td>
-                                        <td class="align-middle">
-                                            <button style="border: none;" class="badge badge-sm bg-gradient-danger" onclick="alert('Are you sure you want to Reject this request?')"><a href="{% url 'req_reject' id=i.id %}" style="color:white;">Reject</a></button>
-                                        </td>
-                                {% elif i.req_type == 1 %}
                                     <td class="align-middle text-center text-sm">
-                                        <button style="border: none;" class="badge badge-sm bg-gradient-success" onclick="alert('Your request is pending. Will be updated once the House Owner accepts the request.')">Pending...</button>
+
+                                        <button style="border: none;" class="badge badge-sm bg-gradient-success" onclick="alert('Are you sure you want to Accept this request?')"><a href="{% url 'hw_request_accept' id=i.id %}" style="color:white;">Accept</a></button>
+
+                                        <!-- <span class="badge badge-sm bg-gradient-secondary">Inactive</span> -->
+
                                     </td>
 
-                                {% else %}
-                                <td class="align-middle text-center text-sm">
-                                        <button style="border: none;" class="badge badge-sm bg-gradient-success" onclick="alert('Your request is Accepted.')">Accepted</button>
+                                    <td class="align-middle">
+
+                                        <button style="border: none;" class="badge badge-sm bg-gradient-danger" onclick="alert('Are you sure you want to Reject this request?')"><a href="{% url 'hw_request_reject' id=i.id %}" style="color:white;">Reject</a></button>
+
+                                        <!-- <button style="border: none;" class="badge badge-sm bg-gradient-success" onclick="alert('Are you sure you want to Activate this Staff?')"><a href="#" style="color:white;">Activate</a></button> -->
+
                                     </td>
-                                {% endif %}
+
                                 </tr>
                                 {% endfor %}
-                                
+
                                 <!-- <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                            
+
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">Alexa Liras</h6>
                                                 <p class="text-xs text-secondary mb-0">alexa@creative-tim.com</p>
@@ -117,7 +116,7 @@
                                 <!-- <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                            
+
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">Laurent Perrier</h6>
                                                 <p class="text-xs text-secondary mb-0">laurent@creative-tim.com</p>
@@ -144,7 +143,7 @@
                                 <!-- <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                            
+
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">Michael Levi</h6>
                                                 <p class="text-xs text-secondary mb-0">michael@creative-tim.com</p>
@@ -171,7 +170,7 @@
                                 <!-- <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                            
+
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">Richard Gran</h6>
                                                 <p class="text-xs text-secondary mb-0">richard@creative-tim.com</p>
@@ -198,7 +197,7 @@
                                 <!-- <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                            
+
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">Miriam Eric</h6>
                                                 <p class="text-xs text-secondary mb-0">miriam@creative-tim.com</p>
