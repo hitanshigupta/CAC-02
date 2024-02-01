@@ -43,6 +43,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            {% if house %}
                                 {% for i in house %}
                                 <tr>
                                     
@@ -58,7 +59,7 @@
                                     </td>
 
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ i.street.Street_name }}</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{ i.hs_number }} {{ i.street.Street_name }}</p>
                                     </td>
 
                                 <td>
@@ -85,9 +86,9 @@
                                     
                                     <td class="align-middle">
                                         {% if i.hs_status == True %}
-                                        <button style="border: none;" class="badge badge-sm bg-gradient-danger" onclick="alert('Are you sure you want to Deactivate this Staff?')"><a href="{% url 'houseStatusChange' h_id=i.id %}" style="color:white;">Inactivate</a></button>
+                                        <button style="border: none;" class="badge badge-sm bg-gradient-danger" onclick="alert('Are you sure you want to Deactivate this House?')"><a href="{% url 'houseStatusChange' h_id=i.id %}" style="color:white;">Inactivate</a></button>
                                         {% else %}
-                                        <button style="border: none;" class="badge badge-sm bg-gradient-success" onclick="alert('Are you sure you want to Activate this Staff?')"><a href="{% url 'houseStatusChange' h_id=i.id %}" style="color:white;">Activate</a></button>
+                                        <button style="border: none;" class="badge badge-sm bg-gradient-success" onclick="alert('Are you sure you want to Activate this House?')"><a href="{% url 'houseStatusChange' h_id=i.id %}" style="color:white;">Activate</a></button>
                                         {% endif %}
                                     </td>
                                     <td>
@@ -99,6 +100,11 @@
                                 </td>
                                 </tr>
                                 {% endfor %}
+
+                            {% else %}
+                                <script>alert('No House to display!')</script>
+
+                            {% endif %}
                                 <!-- <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">

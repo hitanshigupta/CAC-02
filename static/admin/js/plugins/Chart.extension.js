@@ -128,3 +128,4 @@ Chart.elements.Rectangle.prototype.draw = function() {
     ctx.stroke();
   }
 };
+

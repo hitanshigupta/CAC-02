@@ -11,6 +11,7 @@ from .models import House
 from .models import h_img
 from .models import Streets
 from .models import Contact_Form
+from Users.models import User_Req
 
 
 @login_required(login_url='admin_login')
@@ -19,18 +20,20 @@ def dashboard(request):
     user_count = User.objects.all().count()
     staff = User.objects.filter(is_staff=True, is_superuser=False)
     staff_count = staff.count()
+    house_owner = UserType.objects.filter(usertype="House Owner").count()
     student_count = User.objects.filter(is_staff=False, is_superuser=False).count()
+    graph_data = [user_count, staff_count, house_owner, student_count]
     page = "Dashbaord"
     return render(request, 'admin/dashboard.html',
                   {'page': page, 'noti': noti, 'user_count': user_count, 'staff_count': staff_count,
-                   'student_count': student_count})
+                   'student_count': student_count, 'house_owner': house_owner, 'data': graph_data})
 
-
+@login_required(login_url='admin_login')
 def staff_dashboard(request):
     page = "Staff Dashbaord"
     return render(request, 'staff/staff_dashboard.html', {'page': page})
 
-
+@login_required(login_url='admin_login')
 def hw_dashboard(request):
     page = "House Owner Dashbaord"
     return render(request, 'HouseOwner/dashboard.html', {'page': page})
@@ -81,7 +84,7 @@ def admin_logout(request):
 
 
 # Staff
-
+@login_required(login_url='admin_login')
 def create_staff(request):
     if request.method == "POST":
         first_name = request.POST.get('fname')
@@ -112,7 +115,7 @@ def create_staff(request):
     page = "Create Staff"
     return render(request, 'admin/staff/create_staff.html', {'page': page})
 
-
+@login_required(login_url='admin_login')
 def staff_list(request):
     user = User.objects.filter(is_staff=True, is_superuser=False)
     noti = Notification.objects.filter(is_read=False).order_by('-created_at')
@@ -132,7 +135,7 @@ def StaffStatusChange(request, user_id):
         return redirect('staff_list')
     return redirect('staff_list')
 
-
+@login_required(login_url='admin_login')
 def edit_staff(request, staff_id):
     user = User.objects.get(id=staff_id)
     if request.method == "POST":
@@ -144,7 +147,7 @@ def edit_staff(request, staff_id):
     page = "Edit Staff"
     return render(request, 'admin/staff/edit_staff.html', {'user': user, 'page': page})
 
-
+@login_required(login_url='admin_login')
 def staff_passwordchange(request, staff_id):
     user = User.objects.get(id=staff_id)
     if request.method == "POST":
@@ -159,36 +162,9 @@ def staff_passwordchange(request, staff_id):
 
 
 # HOUSE OWNER
-def hwlist(request):
-    hw_user = User.objects.filter(usertype__usertype="House Owner")
-    page = "House Owner's List"
-    return render(request, 'admin/houseOwner/hwlist.html', {'user': hw_user, 'page': page})
-
-
-def createhw(request):
-    if request.method == "POST":
-        username = request.POST.get('username')
-        fname = request.POST.get('fname')
-        lname = request.POST.get('lname')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        cpassword = request.POST.get('cpassword')
-        if cpassword == password:
-            user = User.objects.create_user(first_name=fname, last_name=lname, username=username, email=email)
-            user.set_password(password)
-            user.save()
-            user_type = UserType.objects.create(user=user, usertype="House Owner")
-            user_type.save()
-            return redirect('hwlist')
-        else:
-            msg = "Password and Comfirm Password didn't match! Please try again!"
-            return render(request, 'admin/houseOwner/createhw.html', {'msg': msg})
-    page = "Create House Owner"
-    return render(request, 'admin/houseOwner/createhw.html', {'page': page})
-
 
 # Users
-
+@login_required(login_url='admin_login')
 def users_list(request):
     user = User.objects.filter(is_superuser=False, is_staff=False)
     page = "Users list"
@@ -206,7 +182,7 @@ def UserStatusChange(request, user_id):
         user.save()
         return redirect('users_list')
 
-
+@login_required(login_url='admin_login')
 def edit_user(request, user_id):
     user = User.objects.get(id=user_id)
     if request.method == "POST":
@@ -218,7 +194,7 @@ def edit_user(request, user_id):
     page = "Edit user"
     return render(request, 'admin/users/edit_user.html', {'page': page, 'user': user})
 
-
+@login_required(login_url='admin_login')
 def user_password_change(request, user_id):
     user = User.objects.get(id=user_id)
     if request.method == "POST":
@@ -233,7 +209,7 @@ def user_password_change(request, user_id):
             return render(request, 'admin/users/user_password_change.html', {'msg': msg})
     return render(request, 'admin/users/user_password_change.html')
 
-
+@login_required(login_url='admin_login')
 def create_user(request):
     if request.method == "POST":
         first_name = request.POST.get('fname')
@@ -255,12 +231,12 @@ def create_user(request):
 
 
 # STREETS
-
+@login_required(login_url='admin_login')
 def street_list(request):
     street = Streets.objects.all()
     return render(request, 'admin/streets/street_list.html', {'street': street})
 
-
+@login_required(login_url='admin_login')
 def create_street(request):
     street = Streets.objects.all()
     if request.method == "POST":
@@ -286,7 +262,7 @@ def streetStatusChange(request, id):
         street.save()
         return redirect('street_list')
 
-
+@login_required(login_url='admin_login')
 def edit_street(request, id):
     street = Streets.objects.get(id=id)
     if request.method == "POST":
@@ -301,7 +277,7 @@ def edit_street(request, id):
     page = "Edit Street"
     return render(request, 'admin/streets/edit_street.html', {'page': page, 'street': street})
 
-
+@login_required(login_url='admin_login')
 def contact_form(request):
     msg = Contact_Form.objects.all()
     page = "Contact Form List"
@@ -310,6 +286,7 @@ def contact_form(request):
 
 ### Staffs -------------------------------------------------------------------------------------------------------------------------------------
 
+@login_required(login_url='admin_login')
 def staff_users_list(request):
     user = User.objects.filter(is_superuser=False, is_staff=False)
     page = "Users List"
@@ -327,7 +304,7 @@ def staff_UserStatusChange(request, user_id):
         user.save()
         return redirect('staff_users_list')
 
-
+@login_required(login_url='admin_login')
 def staff_edit_user(request, user_id):
     user = User.objects.get(id=user_id)
     if request.method == "POST":
@@ -339,7 +316,7 @@ def staff_edit_user(request, user_id):
     page = "Edit user"
     return render(request, 'staff/users/edit_users.html', {'page': page, 'user': user})
 
-
+@login_required(login_url='admin_login')
 def staff_create_user(request):
     if request.method == "POST":
         first_name = request.POST.get('fname')
@@ -367,24 +344,18 @@ def staff_create_user(request):
     page = "Create Staff"
     return render(request, 'staff/users/create_user.html', {'page': page})
 
-
+@login_required(login_url='admin_login')
 def house_requests(request):
     page = "House Request"
-    return render(request, 'staff/users/house_request.html', {'page': page})
+    req = User_Req.objects.filter(req_status=True, req_type__in=[0, 1, 2])
+    return render(request, 'staff/users/house_request.html', {'page': page, 'req': req})
 
+@login_required(login_url='admin_login')
+def create_profile(request, staff_id):
 
-def profile(request, staff_id):
-    staff = User.objects.get(id=staff_id)
-    if staff_details.objects.filter(user_id=staff_id).exists():
-        details = staff_details.objects.get(user_id=staff_id)
-        return render(request, 'staff/staff_profile/profile.html', {'details': details, 'staff': staff})
-    else:
-        return redirect('create_profile')
-
-
-def create_profile(request):
     if request.method == "POST":
-        user_id = request.POST.get('user_id')
+
+        user_id = User.objects.get(id=staff_id)
         email = request.POST.get('email')
         staff_land_mark = request.POST.get('staff_land_mark')
         staff_locality = request.POST.get('staff_locality')
@@ -395,7 +366,7 @@ def create_profile(request):
         staff_phone = request.POST.get('staff_phone')
         staff_dob = request.POST.get('staff_dob')
         staff_img = request.FILES['staff_img']
-        staff_details.objects.create(user_id=user_id,
+        staff_det = staff_details.objects.create(user_id=user_id,
                                      staff_email=email,
                                      staff_land_mark=staff_land_mark,
                                      staff_locality=staff_locality,
@@ -407,12 +378,30 @@ def create_profile(request):
                                      staff_dob=staff_dob,
                                      staff_img=staff_img
                                      )
-        staff_details.save()
-        return redirect('profile', staff_id=user_id)
+        staff_det.save()
+        return redirect('profile', staff_id=user_id.id)
     page = "Create Staff Profile"
-    return render(request, 'staff/staff_profile/create_profile.html', {'page': page})
+    if request.user.is_staff:
+        return render(request, 'staff/staff_profile/create_profile.html', {'page': page})
+    else:
+        return render(request, 'HouseOwner/profile/create_hw_profile.html', {'page': page})
 
 
+@login_required(login_url='admin_login')
+def profile(request, staff_id):
+    staff = User.objects.get(id=staff_id)
+    page = "User Profile"
+    if staff_details.objects.filter(user_id=staff_id).exists():
+        details = staff_details.objects.get(user_id=staff_id)
+        if staff.is_staff is True:
+            return render(request, 'staff/staff_profile/profile.html', {'details': details, 'staff': staff, 'page': page})
+        else:
+            return render(request, 'HouseOwner/profile/profile.html', {'details': details, 'staff': staff, 'page': page})
+    else:
+        return redirect('create_profile', staff_id)
+
+
+@login_required(login_url='admin_login')
 def edit_staff_profile(request, user_id):
     user = User.objects.get(id=user_id)
     staff = staff_details.objects.get(user_id=user_id)
@@ -439,15 +428,77 @@ def edit_staff_profile(request, user_id):
     return render(request, 'staff/staff_profile/edit_staff_profile.html', {'user': user, 'staff': staff, 'page': page})
 
 
+<<<<<<< HEAD
 ##########################
+=======
+def req_accept(request, id):
+    req_detail = User_Req.objects.get(id=id)
+    req_detail.req_type = 1
+    staff = request.user
+    req_detail.req_accept_staff = staff
+    req_detail.req_accept_staff = request.user
+    req_detail.save()
+    staff = User_Req.objects.filter()
+    return redirect('house_requests')
+
+
+def req_reject(request, id):
+    req_detail = User_Req.objects.get(id=id)
+    req_detail.req_status = False
+    req_detail.save()
+    return redirect('house_requests')
+
+>>>>>>> 30157e4ea137f4d54b7229f6e751d160826cb686
 
 ### House owner ------------------------------------------------------------------------------------------------------------------------------
-def house_list(request):
-    house = House.objects.all()
+
+@login_required(login_url='admin_login')
+def hwlist(request):
+    hw_user = User.objects.filter(usertype__usertype="House Owner")
+    page = "House Owner's List"
+    return render(request, 'admin/houseOwner/hwlist.html', {'user': hw_user, 'page': page})
+
+@login_required(login_url='admin_login')
+def createhw(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        cpassword = request.POST.get('cpassword')
+        if cpassword == password:
+            user = User.objects.create_user(first_name=fname, last_name=lname, username=username, email=email)
+            user.set_password(password)
+            user.save()
+            user_type = UserType.objects.create(user=user, usertype="House Owner")
+            user_type.save()
+            return redirect('hwlist')
+        else:
+            msg = "Password and Comfirm Password didn't match! Please try again!"
+            return render(request, 'admin/houseOwner/createhw.html', {'msg': msg})
+    page = "Create House Owner"
+    return render(request, 'admin/houseOwner/createhw.html', {'page': page})
+
+
+def hwStatusChange(request, id):
+    owner = User.objects.get(id=id)
+    if owner.is_active == False:
+        owner.is_active = True
+        owner.save()
+        return redirect('hwlist')
+    else:
+        owner.is_active = False
+        owner.save()
+        return redirect('hwlist')
+
+@login_required(login_url='admin_login')
+def house_list(request,user_id):
+    house = House.objects.filter(hs_owner_id=user_id)
     page = "House List"
     return render(request, 'HouseOwner/House/house_list.html', {'page': page, 'house': house})
 
-
+@login_required(login_url='admin_login')
 def create_house(request):
     street = Streets.objects.all()
     if request.method == "POST":
@@ -467,7 +518,9 @@ def create_house(request):
                                              hs_pin=hs_pin, hs_bhk=hs_bhk, hs_rent=hs_rent, hs_desc=hs_desc)
         house_details.hs_status = False
         house_details.save()
-        return redirect('house_list')
+        noti = Notification.objects.create(user=hs_owner, message="Created new House!")
+        noti.save()
+        return redirect('house_list',user_id = hs_owner.id)
     page = "Create Houses"
     return render(request, 'HouseOwner/House/create_house.html', {'page': page, "street": street})
 
@@ -477,13 +530,13 @@ def houseStatusChange(request, h_id):
     if house.hs_status == True:
         house.hs_status = False
         house.save()
-        return redirect('house_list')
+        return redirect('house_list', user_id=request.user.id)
     elif house.hs_status == False:
         house.hs_status = True
         house.save()
-        return redirect('house_list')
+        return redirect('house_list', user_id=request.user.id)
 
-
+@login_required(login_url='admin_login')
 def edit_hw(request, h_id):
     hw = House.objects.get(id=h_id)
     street = Streets.objects.all()
@@ -498,9 +551,30 @@ def edit_hw(request, h_id):
         hw.hs_bhk = request.POST.get('hs_bhk')
         hw.hs_rent = request.POST.get('hs_rent')
         hw.hs_desc = request.POST.get('hs_desc')
-        street_instance = Streets.objects.get(Street_name = street)
+        street_instance = Streets.objects.get(Street_name=street)
         hw.street = street_instance
         hw.save()
         return redirect('house_list')
     page = "Edit House"
     return render(request, 'HouseOwner/House/edit_house.html', {'page': page, 'hw': hw, 'street': street})
+@login_required(login_url='admin_login')
+def hw_house_request(request):
+    req = User_Req.objects.filter(req_status=True)
+    return render(request, 'HouseOwner/house request/house_request.html', {'req': req})
+
+def hw_request_accept(request, id):
+    req = User_Req.objects.get(id=id)
+    req.req_type = 2
+    req.save()
+    house = House.objects.get(id=req.h_id_id)
+    house.current_user = request.user
+    house.save()
+    return redirect('hw_house_request')
+
+def hw_request_reject(request, id):
+    req = User_Req.objects.get(id=id)
+    req.req_type = 3
+    req.save()
+    return redirect('hw_house_request')
+
+

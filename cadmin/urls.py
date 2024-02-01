@@ -59,18 +59,28 @@ urlpatterns = [
         path('staff_create_user' , views.staff_create_user , name="staff_create_user"),
 
         # Staff profile
-        path('create_profile/' , views.create_profile , name="create_profile"),
+        path('create_profile/<int:staff_id>' , views.create_profile , name="create_profile"),
         path('edit_staff_profile/<int:user_id>' , views.edit_staff_profile , name="edit_staff_profile"),
 
         #Page links
         path('house_requests' , views.house_requests , name="house_requests"),
         path('profile/<int:staff_id>' , views.profile , name="profile"),
 
+        # House Request
+        path('req_accept/<int:id>' , views.req_accept , name="req_accept"),
+        path('req_reject/<int:id>' , views.req_reject , name="req_reject"),
 
     ### House owner -------------------------------------------------------------------------------------------------------------------------------
 
+        # House owner
+        path('hwStatusChange/<int:id>', views.hwStatusChange , name="hwStatusChange"),
+        path('hw_house_request', views.hw_house_request, name="hw_house_request"),
+        path('hw_req_accept/<int:id>' , views.hw_request_accept , name="hw_request_accept"),
+        path('hw_request_reject/<int:id>' , views.hw_request_reject , name="hw_request_reject"),
+
+
         #House 
-        path('house_list' , views.house_list , name = "house_list"),
+        path('house_list/<int:user_id>' , views.house_list , name = "house_list"),
         path('create_house' , views.create_house , name="create_house"),
         path('houseStatusChange/<int:h_id>' , views.houseStatusChange , name="houseStatusChange"),
 
