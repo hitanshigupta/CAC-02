@@ -118,7 +118,7 @@
         </div>
         <div class="detail-box">
           <h6>
-            <a href="{% url 'redirect_page' %}">
+            <a href="{% url 'redirect_page' street_id=i.id user_id=request.user.id %}">
               {{ i.Street_name }}
           </h6>
           </a>

@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from cadmin.models import Streets
 from cadmin.models import Contact_Form
 from cadmin.models import UserType
+from cadmin.models import House
+from .models import User_Req
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
@@ -64,8 +66,22 @@ def user_logout(request):
     return redirect('user_login')
 
 
-def redirect_page(request):
-    return render(request, 'Users/main/redirect.html')
+def redirect_page(request, street_id, user_id):
+    street = Streets.objects.get(id=street_id)
+    house = House.objects.filter(street=street_id, hs_status=True)
+    user_req = User_Req.objects.filter(student=user_id)
+    return render(request, 'Users/main/redirect.html', {'house': house, 'street': street, 'user_req': user_req})
+
+
+def user_request(request, user_id, h_id):
+    user = User.objects.get(id=user_id)
+    house = House.objects.get(id=h_id)
+    req = User_Req.objects.create(student=user, h_id=house, req_type=0)
+    req.save()
+    return redirect('redirect_page', house.street.id, request.user.id)
+
+
+
 
 
 

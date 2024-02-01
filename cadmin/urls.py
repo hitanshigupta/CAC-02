@@ -59,7 +59,7 @@ urlpatterns = [
         path('staff_create_user' , views.staff_create_user , name="staff_create_user"),
 
         # Staff profile
-        path('create_profile/' , views.create_profile , name="create_profile"),
+        path('create_profile/<int:staff_id>' , views.create_profile , name="create_profile"),
         path('edit_staff_profile/<int:user_id>' , views.edit_staff_profile , name="edit_staff_profile"),
 
         #Page links
@@ -80,7 +80,7 @@ urlpatterns = [
 
 
         #House 
-        path('house_list' , views.house_list , name = "house_list"),
+        path('house_list/<int:user_id>' , views.house_list , name = "house_list"),
         path('create_house' , views.create_house , name="create_house"),
         path('houseStatusChange/<int:h_id>' , views.houseStatusChange , name="houseStatusChange"),
 

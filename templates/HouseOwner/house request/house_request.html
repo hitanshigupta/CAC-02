@@ -29,14 +29,16 @@
 
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Sharing Type</th>
+                                        Accepted Staff</th>
 
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- for loop  -->
+
                                 {% for i in req %}
+                                    {% if i.req_type != 0 %}
                                 <tr>
 
                                     <td>
@@ -64,9 +66,10 @@
                                     </td>
 
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ i.sharing }}</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{ i.req_accept_staff }}</p>
 
                                     </td>
+                                    {% if i.h_id.hs_owner == request.user and i.req_type == 1 %}
                                     <td class="align-middle text-center text-sm">
 
                                         <button style="border: none;" class="badge badge-sm bg-gradient-success" onclick="alert('Are you sure you want to Accept this request?')"><a href="{% url 'hw_request_accept' id=i.id %}" style="color:white;">Accept</a></button>
@@ -82,8 +85,17 @@
                                         <!-- <button style="border: none;" class="badge badge-sm bg-gradient-success" onclick="alert('Are you sure you want to Activate this Staff?')"><a href="#" style="color:white;">Activate</a></button> -->
 
                                     </td>
+                                {% elif i.req_type == 2 %}
+
+                                <td class="align-middle text-center text-sm">
+
+                                        <button style="border: none;" class="badge badge-sm bg-gradient-success" ><a href="" style="color:white;">Accepted</a></button>
+
+                                </td>
+                                {% endif %}
 
                                 </tr>
+                                    {% endif %}
                                 {% endfor %}
 
                                 <!-- <tr>

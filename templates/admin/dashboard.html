@@ -1,5 +1,13 @@
 {% extends 'bases/adminbase.html' %}
 {% load static %}
+
+{% block extrastyle %}
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+{% endblock extrastyle %}
+
 {% block content %}
 
 <div class="container-fluid py-4">
@@ -116,7 +124,7 @@
         </div>
         <div class="card-body p-3">
           <div class="chart">
-            <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
+            <div id="container-chart"></div>
           </div>
         </div>
       </div>
@@ -125,16 +133,9 @@
       <div class="card card-carousel overflow-hidden h-100 p-0">
         <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
           <div class="carousel-inner border-radius-lg h-100">
-            <div class="carousel-item h-100 active"        
-              style="background-image: url('{% static 'admin/img/carousel-1.jpg' %}'); background-size: cover;">
-              <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                  <i class="ni ni-camera-compact text-dark opacity-10"></i>
-                </div>
-                <h5 class="text-white mb-1">Get started with Argon</h5>
-                <p>There’s nothing I really wanted to do in life that I wasn’t able to get good at.</p>
-              </div>
-            </div>
+            <div class="chart">
+            <div id="container-chart-2"></div>
+          </div>
             <div class="carousel-item h-100"
               style="background-image: url('{% static 'admin/img/carousel-2.jpg' %}');background-size: cover;">
               <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
@@ -384,4 +385,136 @@
     </div>
   </div>
 </div>
+
+    <script>
+    // Data retrieved from https://fas.org/issues/nuclear-weapons/status-world-nuclear-forces/
+Highcharts.chart('container-chart', {
+    chart: {
+        type: 'area'
+    },
+    title: {
+        text: 'US and USSR nuclear stockpiles'
+    },
+    xAxis: {
+        allowDecimals: false,
+        accessibility: {
+            rangeDescription: 'Range: 1940 to 2017.'
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'Nuclear weapon states'
+        }
+    },
+    plotOptions: {
+        area: {
+            pointStart: 1940,
+            marker: {
+                enabled: false,
+                symbol: 'circle',
+                radius: 2,
+                states: {
+                    hover: {
+                        enabled: true
+                    }
+                }
+            }
+        }
+    },
+    series: [{
+        name: 'USA',
+        data: {{ data }}
+    }]
+});
+
+    </script>
+
+    <script>
+
+Highcharts.chart('container-chart-2', {
+    chart: {
+        styledMode: true
+    },
+    title: {
+        text: 'Mobile vendor market share, 2021',
+        align: 'left'
+    },
+    xAxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    },
+    series: [{
+        type: 'pie',
+        allowPointSelect: true,
+        keys: ['name', 'y', 'selected', 'sliced'],
+        data: [
+            ['Staffs', {{ staff_count }}, true, true],
+            ['Students', {{ student_count }}, false],
+            ['House Owners', {{ house_owner }}, false],
+
+        ],
+        showInLegend: true
+    }]
+});
+
+    </script>
+
+    <style>
+    @import url("https://code.highcharts.com/css/highcharts.css");
+
+.highcharts-pie-series .highcharts-point {
+    stroke: #ede;
+    stroke-width: 2px;
+}
+
+.highcharts-pie-series .highcharts-data-label-connector {
+    stroke: silver;
+    stroke-dasharray: 2, 2;
+    stroke-width: 2px;
+}
+
+.highcharts-figure,
+.highcharts-data-table table {
+    min-width: 320px;
+    max-width: 600px;
+    margin: 1em auto;
+}
+
+.highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+    padding: 0.5em;
+}
+
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+
+    </style>
+
 {% endblock content %}
