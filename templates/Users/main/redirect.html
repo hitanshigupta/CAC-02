@@ -40,13 +40,15 @@
     <div class="detail-box">
         <div class="heading_container" align="center" style = "color: #0c0d12; margin-top:1%">
           <h2>
-           Hotel Celebrations
+              {{ Street_name }}
           </h2>
         </div>
     <div class="square-box">
       <img src="{% static 'users/images/square.png' %}" alt="">
     </div>
     <div class="container" id="about" style = "border: 2px solid #000; padding: 20px; margin-top: 2%; margin-bottom: 2%;">
+    {% if house %}
+        {% for i in house %}
       <div class="row">
         <div class="col-md-4">
             <img src="{% static 'users/images/cel1.jpeg' %}" alt="" style="height:100%; width:100%;">
@@ -57,42 +59,56 @@
         <div class="col-md-4">
           <div class="detail-box">
             <p>
-             <b>House No:</b><br>
-             <b>Address:</b><br>
-             <b>BHK:</b><br>
-             <b>Rent:</b><br>
+             <b>House No: </b>{{ i.hs_number }}<br>
+             <b>Address:</b>{{ i.hs_number }} {{ i.street.Street_name }} , {{ i.hs_city }} , {{ i.hs_state }} , <br> {{ i.hs_pin }}<br>
+             <b>BHK:</b> {{ i.hs_bhk }}<br>
+             <b>Rent:</b> ${{ i.hs_rent }}<br>
+                <b>Description:</b> {{ i.hs_desc|safe }}<br>
+                 <b>House Owner:</b> {{ i.hs_owner.first_name }} {{ i.hs_owner.last_name }}<br>
             </p>
-            <a href="{% url 'user_login' %}" class="">
+              {% if user_req %}
+              <a href="" class="">
+                  You have already availed for a house!
+            </a>
+              {% else %}
+            <a href="{% url 'user_request' user_id=request.user.id h_id=i.id %}" class="">
               Send Request
             </a>
+              {% endif %}
           </div>
         </div>
       </div>
+        {% endfor %}
+    {% else %}
+        <div class="container" id="about" style = "border: 2px solid #000; padding: 20px; margin-top: 2%; margin-bottom: 2%;">
+            <center><h1>No house to display!</h1></center>
+        </div>
+    {% endif %}
     </div>
 
-    <div class="container" id="about" style= "border: 2px solid #000; padding: 20px; margin-top: 2%; margin-bottom: 2%;">
-        <div class="row">
-          <div class="col-md-4">
-              <img src="{% static 'users/images/cel2.jpeg' %}" alt="" style="height:100%; width:100%;">
-          </div>
-          <div class="col-md-4">
-            <img src="{% static 'users/images/celbath2.webp' %}" alt="" style="height:100%; width:100%;">
-        </div>
-          <div class="col-md-4">
-            <div class="detail-box">
-              <p>
-               <b>House No:</b><br>
-               <b>Address:</b><br>
-               <b>BHK:</b><br>
-               <b>Rent:</b><br>
-              </p>
-              <a href="{% url 'user_login' %}" class="">
-                Send Request
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+{#    <div class="container" id="about" style= "border: 2px solid #000; padding: 20px; margin-top: 2%; margin-bottom: 2%;">#}
+{#        <div class="row">#}
+{#          <div class="col-md-4">#}
+{#              <img src="{% static 'users/images/cel2.jpeg' %}" alt="" style="height:100%; width:100%;">#}
+{#          </div>#}
+{#          <div class="col-md-4">#}
+{#            <img src="{% static 'users/images/celbath2.webp' %}" alt="" style="height:100%; width:100%;">#}
+{#        </div>#}
+{#          <div class="col-md-4">#}
+{#            <div class="detail-box">#}
+{#              <p>#}
+{#               <b>House No:</b><br>#}
+{#               <b>Address:</b><br>#}
+{#               <b>BHK:</b><br>#}
+{#               <b>Rent:</b><br>#}
+{#              </p>#}
+{#              <a href="{% url 'user_login' %}" class="">#}
+{#                Send Request#}
+{#              </a>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
   </section>
 
 {% endblock content %}

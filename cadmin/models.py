@@ -8,7 +8,7 @@ class UserType(models.Model):
 
 
 class staff_details(models.Model):
-    user_id = models.IntegerField()
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     staff_email = models.EmailField()
     staff_land_mark = models.CharField(max_length=70, default="Not specified")
     staff_locality = models.CharField(max_length=50, blank = True)
@@ -40,6 +40,7 @@ class Streets(models.Model):
 class House(models.Model):
     hs_owner = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     street = models.ForeignKey(Streets, on_delete=models.CASCADE)
+    current_user = models.ForeignKey(User, on_delete=models.CASCADE, null = True, blank = True, related_name="current_user")
     hs_number = models.CharField(max_length=50, default="Not specified")
     hs_city = models.CharField(max_length=50, default="Lavasa")
     hs_state = models.CharField(max_length=50, default="Maharastra")

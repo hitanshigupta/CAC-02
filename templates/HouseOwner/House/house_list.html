@@ -43,6 +43,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            {% if house %}
                                 {% for i in house %}
                                 <tr>
                                     
@@ -99,6 +100,11 @@
                                 </td>
                                 </tr>
                                 {% endfor %}
+
+                            {% else %}
+                                <script>alert('No House to display!')</script>
+
+                            {% endif %}
                                 <!-- <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
