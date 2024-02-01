@@ -439,6 +439,8 @@ def edit_staff_profile(request, user_id):
     return render(request, 'staff/staff_profile/edit_staff_profile.html', {'user': user, 'staff': staff, 'page': page})
 
 
+##########################
+
 ### House owner ------------------------------------------------------------------------------------------------------------------------------
 def house_list(request):
     house = House.objects.all()
