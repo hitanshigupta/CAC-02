@@ -118,7 +118,11 @@
         </div>
         <div class="detail-box">
           <h6>
+              {% if user.is_authenticated %}
             <a href="{% url 'redirect_page' street_id=i.id user_id=request.user.id %}">
+                {% else %}
+                <a href="{% url 'user_login' %}">
+                    {% endif %}
               {{ i.Street_name }}
           </h6>
           </a>
