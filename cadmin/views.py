@@ -554,7 +554,7 @@ def edit_hw(request, h_id):
         street_instance = Streets.objects.get(Street_name=street)
         hw.street = street_instance
         hw.save()
-        return redirect('house_list')
+        return redirect('house_list', user_id=request.user.id)
     page = "Edit House"
     return render(request, 'HouseOwner/House/edit_house.html', {'page': page, 'hw': hw, 'street': street})
 @login_required(login_url='admin_login')
