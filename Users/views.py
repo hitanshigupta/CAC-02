@@ -72,7 +72,6 @@ def redirect_page(request, street_id, user_id):
     user_req = User_Req.objects.filter(student=user_id)
     return render(request, 'Users/main/redirect.html', {'house': house, 'street': street, 'user_req': user_req})
 
-
 def user_request(request, user_id, h_id):
     user = User.objects.get(id=user_id)
     house = House.objects.get(id=h_id)
