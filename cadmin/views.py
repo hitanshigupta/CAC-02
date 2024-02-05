@@ -427,6 +427,7 @@ def edit_staff_profile(request, user_id):
     return render(request, 'staff/staff_profile/edit_staff_profile.html', {'user': user, 'staff': staff, 'page': page})
 
 
+
 def req_accept(request, id):
     req_detail = User_Req.objects.get(id=id)
     req_detail.req_type = 1
@@ -443,6 +444,7 @@ def req_reject(request, id):
     req_detail.req_status = False
     req_detail.save()
     return redirect('house_requests')
+
 
 
 ### House owner ------------------------------------------------------------------------------------------------------------------------------
