@@ -8,7 +8,6 @@ from .models import staff_details
 from .models import Notification
 from .models import UserType
 from .models import House
-from .models import h_img
 from .models import Streets
 from .models import Contact_Form
 from Users.models import User_Req
@@ -509,11 +508,14 @@ def create_house(request):
         hs_pin = request.POST.get('hs_pin')
         hs_bhk = request.POST.get('hs_bhk')
         hs_rent = request.POST.get('hs_rent')
+        hs_image_1 = request.FILES['hs_image_1']
+        hs_image_2 = request.FILES['hs_image_2']
         hs_desc = request.POST.get('hs_desc')
         street_instance = Streets.objects.get(Street_name=street)
         house_details = House.objects.create(hs_owner=hs_owner, hs_number=hs_number, street=street_instance,
                                              hs_city=hs_city, hs_state=hs_state, hs_country=hs_country,
-                                             hs_pin=hs_pin, hs_bhk=hs_bhk, hs_rent=hs_rent, hs_desc=hs_desc)
+                                             hs_pin=hs_pin, hs_bhk=hs_bhk, hs_rent=hs_rent, hs_desc=hs_desc,
+                                             hs_image_1=hs_image_1, hs_image_2=hs_image_2)
         house_details.hs_status = False
         house_details.save()
         noti = Notification.objects.create(user=hs_owner, message="Created new House!")
@@ -574,5 +576,7 @@ def hw_request_reject(request, id):
     req.req_type = 3
     req.save()
     return redirect('hw_house_request')
+
+
 
 

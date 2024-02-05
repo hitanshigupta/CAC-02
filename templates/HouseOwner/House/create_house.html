@@ -40,7 +40,7 @@
 
                     </div>
                 </div>
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="card-body">
                         <p class="text-uppercase text-sm">House Information</p>
@@ -100,6 +100,18 @@
                                     <input class="form-control" name="hs_rent" placeholder="eg : Rs.12000" type="text">
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Rent Price</label>
+                                    <input class="form-control" name="hs_image_1" type="file">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Rent Price</label>
+                                    <input class="form-control" name="hs_image_2" type="file">
+                                </div>
+                            </div>
 
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -115,14 +127,10 @@
                         </div>
                     </div>
 
-                </form>
             </div>
         </div>
 
-    </div>
-</div>
-
-<script>
+    <script>
 
 tinymce.init({
   selector: 'textarea#basic-example',
