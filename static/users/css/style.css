@@ -870,9 +870,10 @@ a:focus {
   list-style-type: none;
 }
 
-.info_section .info_links ul li a {
+.info_section .info_links ul li a .info_links :hover{
   color: #ffffff;
 }
+
 
 .info_section .info_contact .img-box {
   width: 35px;
