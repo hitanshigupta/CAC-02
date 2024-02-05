@@ -51,10 +51,10 @@
         {% for i in house %}
       <div class="row">
         <div class="col-md-4">
-            <img src="{% static 'users/images/cel1.jpeg' %}" alt="" style="height:100%; width:100%;">
+            <img src="{{ i.hs_image_1.url }}" alt="" style="height:100%; width:100%;">
         </div>
         <div class="col-md-4">
-              <img src="{% static 'users/images/celbath.jpeg' %}" alt="" style="height:100%; width:100%;">
+              <img src="{{ i.hs_image_2.url }}" alt="" style="height:100%; width:100%;">
           </div>
         <div class="col-md-4">
           <div class="detail-box">
@@ -67,11 +67,13 @@
                  <b>House Owner:</b> {{ i.hs_owner.first_name }} {{ i.hs_owner.last_name }}<br>
             </p>
               {% if user_req %}
-              <a href="" class="">
-                  You have already availed for a house!
+                  {% for i in user_req %}
+              <a href="{% url 'delete_request' req_id=i.id %}" onclick="alert('Are you sure you want to cancel the request?')" class="">
+                  Cancel your request
             </a>
+                  {% endfor %}
               {% else %}
-            <a href="{% url 'user_request' user_id=request.user.id h_id=i.id %}" class="">
+            <a href="{% url 'user_request' user_id=request.user.id h_id=i.id %}" onclick="alert('Are you sure you want to send a request?')" class="">
               Send Request
             </a>
               {% endif %}

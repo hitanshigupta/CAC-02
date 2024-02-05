@@ -79,6 +79,10 @@ def user_request(request, user_id, h_id):
     req.save()
     return redirect('redirect_page', house.street.id, request.user.id)
 
+def delete_request(request, req_id):
+    req = User_Req.objects.get(id=req_id)
+    req.delete()
+    return redirect('index')
 
 
 
