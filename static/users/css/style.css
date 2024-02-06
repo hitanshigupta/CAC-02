@@ -870,7 +870,7 @@ a:focus {
   list-style-type: none;
 }
 
-.info_section .info_links ul li a {
+.info_section .info_links ul li a .info_links :hover{
   color: #ffffff;
 }
 

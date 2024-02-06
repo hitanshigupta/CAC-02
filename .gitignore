@@ -1,7 +1,6 @@
 *.cache
 __pycache__/
 
-db.sqlite3
 
 Users/__pycache__/
 cadmin/__pycache__/
