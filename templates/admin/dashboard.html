@@ -3,10 +3,13 @@
 
 {% block extrastyle %}
     <script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/series-label.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/cylinder.js"></script>
 {% endblock extrastyle %}
 
 {% block content %}
@@ -123,16 +126,9 @@
             <span class="font-weight-bold">4% more</span> in 2021
           </p>
         </div>
-            <div id="container"></div>
             <figure class="highcharts-figure">
-                <div id="container"></div>
-                    <p class="highcharts-description">
-                    Basic line chart showing trends in a dataset. This chart includes the
-                    <code>series-label</code> module, which adds a label to each line for
-                    enhanced readability.
-                    </p>
+                <div id="container1"></div>
             </figure>
-      </div>
       </div>
     </div>
     <div class="col-lg-5">
@@ -140,7 +136,11 @@
         <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
           <div class="carousel-inner border-radius-lg h-100">
             <div class="chart">
-            <div id="container-chart-2"></div>
+            <div id="container-chart-2">
+                <figure class="highcharts-figure">
+                    <div id="container2"></div>
+
+                </figure></div>
           </div>
             <div class="carousel-item h-100"
               style="background-image: url('{% static 'admin/img/carousel-2.jpg' %}');background-size: cover;">
@@ -393,93 +393,132 @@
 
 
 
-    // Data retrieved from https://fas.org/issues/nuclear-weapons/status-world-nuclear-forces/
+
 
     <script>
 
-    Highcharts.chart('container', {
+    {#Chart 2#}
 
+    Highcharts.chart('container1', {
+    chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45,
+            beta: 0
+        }
+    },
     title: {
-        text: 'U.S Solar Employment Growth',
+        text: 'Global smartphone shipments market share, Q1 2022',
         align: 'left'
     },
-
     subtitle: {
-        text: 'By Job Category. Source: <a href="https://irecusa.org/programs/solar-jobs-census/" target="_blank">IREC</a>.',
+        text: 'Source: ' +
+            '<a href="https://www.counterpointresearch.com/global-smartphone-share/"' +
+            'target="_blank">Counterpoint Research</a>',
         align: 'left'
     },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            depth: 35,
+            dataLabels: {
+                enabled: true,
+                format: '{point.name}'
+            }
+        }
+    },
+    series: [{
+        type: 'pie',
+        name: 'Share',
+        data: [
+            {% for i in house_counts_by_street %}
+            ['{{ i.street__Street_name }}',{{ i.total_houses }}],
+            {% endfor %}
+        ]
+    }]
+});
 
+
+    {#chart-2#}
+
+    Highcharts.chart('container2', {
+    chart: {
+        type: 'cylinder',
+        options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }
+    },
+    title: {
+        text: 'Number of confirmed COVID-19'
+    },
+    subtitle: {
+        text: 'Source: ' +
+            '<a href="https://www.fhi.no/en/id/infectious-diseases/coronavirus/daily-reports/daily-reports-COVID19/"' +
+            'target="_blank">FHI</a>'
+    },
+    xAxis: {
+        categories: ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80-89', '90+'],
+        title: {
+            text: 'Age groups'
+        },
+        labels: {
+            skew3d: true
+        }
+    },
     yAxis: {
         title: {
-            text: 'Number of Employees'
+            margin: 20,
+            text: 'Reported cases'
+        },
+        labels: {
+            skew3d: true
         }
     },
-
-    xAxis: {
-        accessibility: {
-            rangeDescription: 'Range: 2010 to 2020'
-        }
+    tooltip: {
+        headerFormat: '<b>Age: {point.x}</b><br>'
     },
-
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
-    },
-
     plotOptions: {
         series: {
-            label: {
-                connectorAllowed: false
-            },
-            pointStart: 2010
+            depth: 25,
+            colorByPoint: true
         }
     },
-
     series: [{
-        name: 'Installation & Developers',
-        data: [43934, 48656, 65165, 81827, 112143, 142383,
-            171533, 165174, 155157, 161454, 154610]
-    }, {
-        name: 'Manufacturing',
-        data: [24916, 37941, 29742, 29851, 32490, 30282,
-            38121, 36885, 33726, 34243, 31050]
-    }, {
-        name: 'Sales & Distribution',
-        data: [11744, 30000, 16005, 19771, 20185, 24377,
-            32147, 30912, 29243, 29213, 25663]
-    }, {
-        name: 'Operations & Maintenance',
-        data: [null, null, null, null, null, null, null,
-            null, 11164, 11218, 10077]
-    }, {
-        name: 'Other',
-        data: [21908, 5548, 8105, 11248, 8989, 11816, 18274,
-            17300, 13053, 11906, 10073]
-    }],
-
-    responsive: {
-        rules: [{
-            condition: {
-                maxWidth: 500
-            },
-            chartOptions: {
-                legend: {
-                    layout: 'horizontal',
-                    align: 'center',
-                    verticalAlign: 'bottom'
-                }
-            }
-        }]
-    }
-
+        data: [95321, 169339, 121105, 136046, 106800, 58041, 26766, 14291,
+            7065, 3283],
+        name: 'Cases',
+        showInLegend: false
+    }]
 });
 
     </script>
     <style>
+
+
+
+{#Container 2 #}
+
+        #container1 {
+    height: 400px;
+}
+
 .highcharts-figure,
 .highcharts-data-table table {
-    min-width: 360px;
+    min-width: 310px;
     max-width: 800px;
     margin: 1em auto;
 }
@@ -519,6 +558,64 @@
 .highcharts-data-table tr:hover {
     background: #f1f7ff;
 }
+
+
+{#Chart 3#}
+
+Highcharts.chart('container2', {
+    chart: {
+        type: 'cylinder',
+        options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }
+    },
+    title: {
+        text: 'Number of confirmed COVID-19'
+    },
+    subtitle: {
+        text: 'Source: ' +
+            '<a href="https://www.fhi.no/en/id/infectious-diseases/coronavirus/daily-reports/daily-reports-COVID19/"' +
+            'target="_blank">FHI</a>'
+    },
+    xAxis: {
+        categories: ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80-89', '90+'],
+        title: {
+            text: 'Age groups'
+        },
+        labels: {
+            skew3d: true
+        }
+    },
+    yAxis: {
+        title: {
+            margin: 20,
+            text: 'Reported cases'
+        },
+        labels: {
+            skew3d: true
+        }
+    },
+    tooltip: {
+        headerFormat: '<b>Age: {point.x}</b><br>'
+    },
+    plotOptions: {
+        series: {
+            depth: 25,
+            colorByPoint: true
+        }
+    },
+    series: [{
+        data: [95321, 169339, 121105, 136046, 106800, 58041, 26766, 14291,
+            7065, 3283],
+        name: 'Cases',
+        showInLegend: false
+    }]
+});
+
 
     </style>
 

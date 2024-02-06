@@ -11,6 +11,8 @@ from .models import House
 from .models import Streets
 from .models import Contact_Form
 from Users.models import User_Req
+from django.db.models import Count
+
 
 
 @login_required(login_url='admin_login')
@@ -23,9 +25,15 @@ def dashboard(request):
     student_count = User.objects.filter(is_staff=False, is_superuser=False).count()
     graph_data = [user_count, staff_count, house_owner, student_count]
     page = "Dashbaord"
+    house_counts_by_street = House.objects.values('street__Street_name').annotate(total_houses=Count('id'))
+    st1 = House.objects.filter(hs_rent__gte=0, hs_rent__lte=20000).count()
+    st2 = House.objects.filter(hs_rent__gte=20000, hs_rent__lte=40000).count()
+    st3 = House.objects.filter(hs_rent__gte=40000, hs_rent__lte=60000).count()
+    st4 = House.objects.filter(hs_rent__gte=60000, hs_rent__lte=80000).count()
+    st5 = House.objects.filter(hs_rent__gte=80000, hs_rent__lte=100000).count()
     return render(request, 'admin/dashboard.html',
                   {'page': page, 'noti': noti, 'user_count': user_count, 'staff_count': staff_count,
-                   'student_count': student_count, 'house_owner': house_owner, 'data': graph_data})
+                   'student_count': student_count, 'house_owner': house_owner, 'data': graph_data,'house_counts_by_street':house_counts_by_street})
 
 @login_required(login_url='admin_login')
 def staff_dashboard(request):
@@ -351,9 +359,7 @@ def house_requests(request):
 
 @login_required(login_url='admin_login')
 def create_profile(request, staff_id):
-
     if request.method == "POST":
-
         user_id = User.objects.get(id=staff_id)
         email = request.POST.get('email')
         staff_land_mark = request.POST.get('staff_land_mark')
@@ -549,10 +555,22 @@ def edit_hw(request, h_id):
         hw.hs_bhk = request.POST.get('hs_bhk')
         hw.hs_rent = request.POST.get('hs_rent')
         hw.hs_desc = request.POST.get('hs_desc')
+
+        if 'hs_image_1_new' in request.FILES and request.FILES['hs_image_1_new'].size > 0:
+            hw_img_1 = request.FILES['hs_image_1_new']
+            hw.hs_image_1 = hw_img_1
+
+
+
+        if 'hs_image_2_new' in request.FILES and request.FILES['hs_image_2_new'].size > 0:
+            hw_img_2 = request.FILES['hs_image_2_new']
+            hw.hs_image_2 = hw_img_2
+
+
         street_instance = Streets.objects.get(Street_name=street)
         hw.street = street_instance
         hw.save()
-        return redirect('house_list')
+        return redirect('house_list', user_id=request.user.id)
     page = "Edit House"
     return render(request, 'HouseOwner/House/edit_house.html', {'page': page, 'hw': hw, 'street': street})
 @login_required(login_url='admin_login')

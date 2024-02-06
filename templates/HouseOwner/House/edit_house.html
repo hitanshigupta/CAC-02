@@ -40,7 +40,7 @@
 
                     </div>
                 </div>
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="card-body">
                         <p class="text-uppercase text-sm">House Information</p>
@@ -97,6 +97,31 @@
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">Rent Price</label>
                                     <input class="form-control" name="hs_rent" value="{{ hw.hs_rent }}" placeholder="eg : Rs.12000" type="text">
+                                </div>
+                            </div>
+{#                            House image edit#}
+                            <div class="col-md-6">
+                                <div class="form-group">
+
+                                    <input class="form-control" name="hs_image_1" value="{{ hw.hs_image_1 }}" disabled hidden type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">House image 1</label>
+                                    <input class="form-control" name="hs_image_1_new"  type="file">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+
+                                    <input class="form-control" name="hs_image_2" value="{{ hw.hs_image_2 }}" disabled hidden type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">House image 2</label>
+                                    <input class="form-control" name="hs_image_2_new"  type="file">
                                 </div>
                             </div>
 
