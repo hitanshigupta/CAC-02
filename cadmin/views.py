@@ -20,6 +20,8 @@ def dashboard(request):
     noti = Notification.objects.filter(is_read=False).order_by('-created_at')
     user_count = User.objects.all().count()
     staff = User.objects.filter(is_staff=True, is_superuser=False)
+    staff_table = User.objects.filter(is_active=True, is_staff=True, is_superuser=False)
+    hw_table = UserType.objects.filter(usertype="House Owner")
     staff_count = staff.count()
     house_owner = UserType.objects.filter(usertype="House Owner").count()
     student_count = User.objects.filter(is_staff=False, is_superuser=False).count()
@@ -62,7 +64,9 @@ def dashboard(request):
     }
     return render(request, 'admin/dashboard.html',
                   {'page': page, 'noti': noti, 'user_count': user_count, 'staff_count': staff_count,
-                   'student_count': student_count, 'house_owner': house_owner, 'data': graph_data,'house_counts_by_street':house_counts_by_street, 'house_rent':house_rent})
+                   'student_count': student_count, 'house_owner': house_owner, 'data': graph_data,
+                   'house_counts_by_street': house_counts_by_street, 'house_rent': house_rent, 'staff_table': staff_table,
+                   'hw_table': hw_table, })
 
 @login_required(login_url='admin_login')
 def staff_dashboard(request):
