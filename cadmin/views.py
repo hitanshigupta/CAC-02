@@ -31,9 +31,38 @@ def dashboard(request):
     st3 = House.objects.filter(hs_rent__gte=40000, hs_rent__lte=60000).count()
     st4 = House.objects.filter(hs_rent__gte=60000, hs_rent__lte=80000).count()
     st5 = House.objects.filter(hs_rent__gte=80000, hs_rent__lte=100000).count()
+
+    ranges = [
+        (0, 10000),
+        (10000, 20000),
+        (20000, 30000),
+        (30000, 40000),
+        (40000, 50000),
+        (50000, 60000),
+        (60000, 70000),
+        (70000, 80000),
+        (80000, 90000),
+        (90000, None)  # The last range for values >= 90k
+    ]
+
+    # Create a list to store the count for each range
+    counts = []
+
+    # Use Django ORM to get counts for each range
+    for start, end in ranges:
+        if end is not None:
+            count = House.objects.filter(hs_rent__gte=start, hs_rent__lt=end).count()
+        else:
+            count = House.objects.filter(hs_rent__gte=start).count()
+        counts.append(count)
+
+    house_rent = {
+        'ranges': ranges,
+        'counts': counts,
+    }
     return render(request, 'admin/dashboard.html',
                   {'page': page, 'noti': noti, 'user_count': user_count, 'staff_count': staff_count,
-                   'student_count': student_count, 'house_owner': house_owner, 'data': graph_data,'house_counts_by_street':house_counts_by_street})
+                   'student_count': student_count, 'house_owner': house_owner, 'data': graph_data,'house_counts_by_street':house_counts_by_street, 'house_rent':house_rent})
 
 @login_required(login_url='admin_login')
 def staff_dashboard(request):

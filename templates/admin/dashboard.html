@@ -409,13 +409,13 @@
         }
     },
     title: {
-        text: 'Global smartphone shipments market share, Q1 2022',
+        text: 'Propotion of Houses in each Streets',
         align: 'left'
     },
     subtitle: {
         text: 'Source: ' +
             '<a href="https://www.counterpointresearch.com/global-smartphone-share/"' +
-            'target="_blank">Counterpoint Research</a>',
+            'target="_blank">Own source</a>',
         align: 'left'
     },
     accessibility: {
@@ -463,7 +463,7 @@
         }
     },
     title: {
-        text: 'Number of confirmed COVID-19'
+        text: 'Classification of range of Houses according to their rent price'
     },
     subtitle: {
         text: 'Source: ' +
@@ -471,7 +471,7 @@
             'target="_blank">FHI</a>'
     },
     xAxis: {
-        categories: ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80-89', '90+'],
+        categories: ['0-10k', '10k-19k', '20k-29k', '30k-39k', '40k-49k', '50k-59k', '60k-69k', '70k-79k', '80k-89k', '90k+'],
         title: {
             text: 'Age groups'
         },
@@ -498,8 +498,7 @@
         }
     },
     series: [{
-        data: [95321, 169339, 121105, 136046, 106800, 58041, 26766, 14291,
-            7065, 3283],
+        data: {{house_rent.counts}},
         name: 'Cases',
         showInLegend: false
     }]
