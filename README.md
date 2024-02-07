@@ -38,9 +38,9 @@ Languages: <br>
 5. Django <br>
 6. Python <br>
 <br>
-Database:
-1. Mysqllite3
-
+Database:<br>
+1. Mysqllite3<br>
+<br>
 <center><b><u>Visual Details of Web pages. </u></b></center>
 
 ![alt text](<Images/Screenshot 2024-02-06 at 10.03.54.png>)
