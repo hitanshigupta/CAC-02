@@ -20,7 +20,7 @@ Discover <b>UniStay</b> – your top choice for student housing in Lavasa. We ex
 3. Staff Login Page: Provides a secure login page for staff to access to their account only, edit and maintain their profiles, view user's house request, accept/reject it. If accepted, the request will go to the respective house owner.<br>
 4. House Owner Login Page: Provides a secure login page for house owners to access to their account only, edit and maintain their profiles, add their property details, activate/deactivate the same on the basis of availability, view staff's house request, accept/reject it. <br>
 5. Home Page: The website that is rendered when the URL is generated, gives brief about the platform and lists the streets where houses are available.<br>
-
+<br>
 <center><b><u>MAIN FUNCTIONS </u></b></center><br>
 1. User authenication and authorization. <br>
 2. Profile Creation and Management. <br>
@@ -28,7 +28,7 @@ Discover <b>UniStay</b> – your top choice for student housing in Lavasa. We ex
 4. Admin Dashboard for all types of user management and control.<br>
 5. Feedback functionality.<br>
 6. Staff and House Owner automated Dashboard.<br>
-
+<br>
 <center><b><u> DEPENDENCIES</u></b></center><br>
 Languages: <br>
 1. HTML <br>
@@ -37,8 +37,8 @@ Languages: <br>
 4. JavaScript <br>
 5. Django <br>
 6. Python <br>
-
-Database:<br>
+<br>
+Database:
 1. Mysqllite3
 
 <center><b><u>Visual Details of Web pages. </u></b></center>
