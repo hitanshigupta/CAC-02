@@ -444,7 +444,7 @@ def edit_staff_profile(request, user_id):
     user = User.objects.get(id=user_id)
     staff = staff_details.objects.get(user_id=user_id)
     if request.method == "POST":
-        staff.user_id = request.POST.get('user_id')
+        staff.user_id = user
         staff.staff_email = request.POST.get('email')
         staff.staff_land_mark = request.POST.get('staff_land_mark')
         staff.staff_locality = request.POST.get('staff_locality')
