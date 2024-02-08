@@ -39,6 +39,8 @@
 
                                 {% for i in req %}
                                     {% if i.req_type != 0 %}
+                                        {% if i.h_id.hs_owner == request.user %}
+
                                 <tr>
 
                                     <td>
@@ -80,7 +82,7 @@
 
                                     <td class="align-middle">
 
-                                        <button style="border: none;" class="badge badge-sm bg-gradient-danger" onclick="alert('Are you sure you want to Reject this request?')"><a href="{% url 'hw_request_reject' id=i.id %}" style="color:white;">Reject</a></button>
+                                        <button style="border: none;" class="badge badge-sm bg-gradient-danger" onclick="alert('Are you sure you want to Reject this request?')"><a href="{% url 'delete_req' id=i.id %}" style="color:white;">Reject</a></button>
 
                                         <!-- <button style="border: none;" class="badge badge-sm bg-gradient-success" onclick="alert('Are you sure you want to Activate this Staff?')"><a href="#" style="color:white;">Activate</a></button> -->
 
@@ -95,6 +97,7 @@
                                 {% endif %}
 
                                 </tr>
+                                    {% endif %}
                                     {% endif %}
                                 {% endfor %}
 

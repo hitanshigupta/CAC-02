@@ -622,10 +622,9 @@ def hw_request_accept(request, id):
     house.save()
     return redirect('hw_house_request')
 
-def hw_request_reject(request, id):
+def delete_req(request, id):
     req = User_Req.objects.get(id=id)
-    req.req_type = 3
-    req.save()
+    req.delete()
     return redirect('hw_house_request')
 
 

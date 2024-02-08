@@ -72,7 +72,7 @@
                                             <button style="border: none;" class="badge badge-sm bg-gradient-success" onclick="alert('Are you sure you want to Accept this request?')"><a href="{% url 'req_accept' id=i.id %}" style="color:white;">Accept</a></button>
                                         </td>
                                         <td class="align-middle">
-                                            <button style="border: none;" class="badge badge-sm bg-gradient-danger" onclick="alert('Are you sure you want to Reject this request?')"><a href="{% url 'req_reject' id=i.id %}" style="color:white;">Reject</a></button>
+                                            <button style="border: none;" class="badge badge-sm bg-gradient-danger" onclick="alert('Are you sure you want to Reject this request?')"><a href="{% url 'delete_req' id=i.id %}" style="color:white;">Reject</a></button>
                                         </td>
                                 {% elif i.req_type == 1 %}
                                     <td class="align-middle text-center text-sm">

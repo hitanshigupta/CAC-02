@@ -74,15 +74,15 @@ urlpatterns = [
 
         # House owner
         path('hwStatusChange/<int:id>', views.hwStatusChange , name="hwStatusChange"),
-        path('hw_house_request', views.hw_house_request, name="hw_house_request"),
+        path('hw_house_request/', views.hw_house_request, name="hw_house_request"),
         path('hw_req_accept/<int:id>' , views.hw_request_accept , name="hw_request_accept"),
-        path('hw_request_reject/<int:id>' , views.hw_request_reject , name="hw_request_reject"),
 
 
         #House 
         path('house_list/<int:user_id>' , views.house_list , name = "house_list"),
         path('create_house' , views.create_house , name="create_house"),
         path('houseStatusChange/<int:h_id>' , views.houseStatusChange , name="houseStatusChange"),
+        path('delete_req/<int:id>' , views.delete_req, name="delete_req")
 
 
 
