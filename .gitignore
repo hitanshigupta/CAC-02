@@ -4,3 +4,5 @@ __pycache__/
 
 Users/__pycache__/
 cadmin/__pycache__/
+db.sqlite3
+.DS_Store

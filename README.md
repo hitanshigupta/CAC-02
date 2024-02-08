@@ -11,36 +11,36 @@
 
 <b><u><center>PROJECT OVERVIEW</center></u></b>
 
-Introduction:
-Discover UniStay – your top choice for student housing in Lavasa. We excel in offering convenient rental solutions designed specifically for students. From cozy studio apartments to shared houses and private rooms, we focus on safety, comfort, and cost-effectiveness. Our intuitive website simplifies the process of browsing, comparing, and reserving accommodations, backed by attentive customer support. Start your search for the ideal home-away-from-home with UniStay now!
+Introduction:<br>
+Discover <b>UniStay</b> – your top choice for student housing in Lavasa. We excel in offering convenient rental solutions designed specifically for students. From cozy studio apartments to shared houses and private rooms, we focus on safety, comfort, and cost-effectiveness. Our intuitive website simplifies the process of browsing, comparing, and reserving accommodations, backed by attentive customer support. Start your search for the ideal home-away-from-home with UniStay now!
 
-<center><b><u>FUNCTIONALITY</u></b></center>center>
-1. Admin Page(Dashboard): Allows administrators to register user profiles, manage requests and handle messages.
-2. User Login Page: Provides a secure login page for users to access to their account only and further view property details and request if interested.
-3. Staff Login Page: Provides a secure login page for staff to access to their account only, edit and maintain their profiles, view user's house request, accept/reject it. If accepted, the request will go to the respective house owner.
-4. House Owner Login Page: Provides a secure login page for house owners to access to their account only, edit and maintain their profiles, add their property details, activate/deactivate the same on the basis of availability, view staff's house request, accept/reject it. 
-5. Home Page: The website that is rendered when the URL is generated, gives brief about the platform and lists the streets where houses are available.
-
-<center><b><u>MAIN FUNCTIONS </u></b></center>
+<center><b><u>FUNCTIONALITIES</u></b></center><br>
+1. Admin Page(Dashboard): Allows administrators to register user profiles, manage requests and handle messages.<br>
+2. User Login Page: Provides a secure login page for users to access to their account only and further view property details and request if interested.<br>
+3. Staff Login Page: Provides a secure login page for staff to access to their account only, edit and maintain their profiles, view user's house request, accept/reject it. If accepted, the request will go to the respective house owner.<br>
+4. House Owner Login Page: Provides a secure login page for house owners to access to their account only, edit and maintain their profiles, add their property details, activate/deactivate the same on the basis of availability, view staff's house request, accept/reject it. <br>
+5. Home Page: The website that is rendered when the URL is generated, gives brief about the platform and lists the streets where houses are available.<br>
+<br>
+<center><b><u>MAIN FUNCTIONS </u></b></center><br>
 1. User authenication and authorization. <br>
 2. Profile Creation and Management. <br>
 3. Sending house requests.<br>
 4. Admin Dashboard for all types of user management and control.<br>
 5. Feedback functionality.<br>
-6. Staff and House Owner automated Dashboard.
-
-<center><b><u> DEPENDENCIES</u></b></center>
-Languages: 
+6. Staff and House Owner automated Dashboard.<br>
+<br>
+<center><b><u> DEPENDENCIES</u></b></center><br>
+Languages: <br>
 1. HTML <br>
 2. CSS <br>
 3. SCSS <br>
 4. JavaScript <br>
 5. Django <br>
 6. Python <br>
-
-Database:
-1. Mysqllite3
-
+<br>
+Database:<br>
+1. Mysqllite3<br>
+<br>
 <center><b><u>Visual Details of Web pages. </u></b></center>
 
 ![alt text](<Images/Screenshot 2024-02-06 at 10.03.54.png>)
@@ -66,7 +66,8 @@ Fig 4 : Login page for all the modules.
 <br>
 <br>
 <br>
-![alt text](<Images/Screenshot 2024-02-06 at 10.13.16.png>)
+
+![alt text](<Images/Screenshot 2024-02-07 at 12.22.43 PM (1).png>)
 Fig 3 : Admin portal for all the Super user.
 <br>
 <br>
