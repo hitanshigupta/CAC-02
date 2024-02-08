@@ -126,7 +126,7 @@
                     {% endif %}
               {{ i.Street_name }}
             {% else %}
-            <a href="" onclick="alert('Please login')">{{ i.Street_name }}</a>
+            <a href="{% url 'user_login' %}">{{ i.Street_name }}</a>
             {% endif %}
           </h6>
           </a>
@@ -596,4 +596,4 @@ end price section -->
 </section>
 
 <!-- end client section -->
-{% endblock content %}
+{% endblock content %}OkayOkayOkay I'll tell
